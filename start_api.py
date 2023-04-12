@@ -1,91 +1,66 @@
-from flask import Flask
-from flask_restful import Resource, Api, reqparse
-import pymysql
-import json
+from flask import Flask, jsonify, request, abort
 
 app = Flask(__name__)
-api = Api(app)
-connection = pymysql.connect(host='localhost', user='root', password='0397495785Ab@', db='mymucsic')
 
 
-class MyMusicObj(Resource):
-    # select data
-    def get(self, mymucsic_id):
-        if mymucsic_id != '*':
-            with connection.cursor() as cursor:
-                # Read a single record
-                sql = "SELECT * FROM 'tbl_song' WHERE 'my_song_id'=%s"
-                cursor.execute(sql, mymucsic_id)
-                result = cursor.fetchone()
-                if result is not None:
-                    res = {'my_song_id': result[0],
-                           'my_name': result[1],
-                           'my_description': result[2],
-                           'my_type_id': result[3]
-                           }
-                    return res
-                else:
-                    return "", 404
-        else:
-            with connection.cursor() as cursor:
-                # Read a single record
-                sql = "SELECT * FROM 'tbl_song'"
-                cursor.execute(sql)
-                result = cursor.fetchall()
-                if result is not None:
-                    res = []
-                    for r in result:
-                        res.append(
-                            {'my_song_id': result[0],
-                             'my_name': result[1],
-                             'my_description': result[2],
-                             'my_type_id': result[3]
-                             })
-                    return res
-                else:
-                    return "", 500
-
-    # insert data
-    def post(self, mymucsic_id):
-        args = parser.parse_args()
-        json_msg = json.load(args['data'])  # json.loads(args['data'])
-        with connection.cursor() as cursor:
-            for param in json_msg:
-                sql = "INSERT INTO 'tbl_song' VALUES (%s, %s, %s, %s)"
-                params = (param['my_song_id'], param['my_name'], param['my_description'], param['my_type_id'])
-                # Execute the query
-                cursor.execute(sql, params)
-                # the connection is not autocommited by default. So we must commit to save our changes.
-                connection.commit()
-        return {"status": "success|fail"}, 200 | 500
-
-    # modify data
-    def put(self, mymucsic_id):
-        pass
-
-    # delete data
-    def delete(self, mymucsic_id):
-        with connection.cursor() as cursor:
-            sql_delete = "DELETE FROM `tbl_employee` WHERE `em_id`=%s"
-            params = (mymucsic_id)
-            # Execute the query
-            cursor.execute(sql_delete, params)
-            # the connection is not autocommited by default. So we must commit to save our changes.
-            connection.commit()
-        return {"status": "success"}, 204
-        pass
+# Tạo dữ liệu ví dụ
+tracks = [
+    {'id': 1, 'title': 'Track 1', 'artist': 'Artist 1'},
+    {'id': 2, 'title': 'Track 2', 'artist': 'Artist 2'}
+]
 
 
-# class EmployeeQuery:
-#     def post(self):
-#         pass
+# Lấy danh sách tất cả các tracks
+@app.route('/tracks', methods=['GET'])
+def get_tracks():
+    return jsonify(tracks)
 
 
-api.add_resource(MyMusicObj, '/tbl/song/*')
-# api.add_resource(EmployeeQuery, '/query/emp')
+# Lấy một track theo ID
+@app.route('/tracks/<int:track_id>', methods=['GET'])
+def get_track(track_id):
+    track = [track for track in tracks if track['id'] == track_id]
+    if len(track) == 0:
+        abort(404)
+    return jsonify(track[0])
 
-if __name__ == '__main__':
-    parser = reqparse.RequestParser()
-    # Look only in the POST body
-    parser.add_argument('data', type=list, location='json')
+
+# Thêm một track mới
+@app.route('/tracks', methods=['POST'])
+def create_track():
+    if not request.json or not 'title' in request.json:
+        abort(400)
+    track = {
+        'id': tracks[-1]['id'] + 1,
+        'title': request.json['title'],
+        'artist': request.json.get('artist', '')
+    }
+    tracks.append(track)
+    return jsonify({'track': track}), 201
+
+
+# Cập nhật thông tin của một track theo ID
+@app.route('/tracks/<int:track_id>', methods=['PUT'])
+def update_track(track_id):
+    track = [track for track in tracks if track['id'] == track_id]
+    if len(track) == 0:
+        abort(404)
+    if not request.json:
+        abort(400)
+    track[0]['title'] = request.json.get('title', track[0]['title'])
+    track[0]['artist'] = request.json.get('artist', track[0]['artist'])
+    return jsonify({'track': track[0]})
+
+
+# Xóa một track theo ID
+@app.route('/tracks/<int:track_id>', methods=['DELETE'])
+def delete_track(track_id):
+    track = [track for track in tracks if track['id'] == track_id]
+    if len(track) == 0:
+        abort(404)
+    tracks.remove(track[0])
+    return jsonify({'result': True})
+
+
+if __name__ == "__main__":
     app.run(debug=True)
