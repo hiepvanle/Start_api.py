@@ -1,52 +1,60 @@
 from flask import Flask, jsonify, request, abort
+import pymysql
 
 app = Flask(__name__)
-
-# Tạo dữ liệu ví dụ
-MySong = [
+collections = pymysql.connect(host="localhost", user="root", password="0397495785Ab@", db="mymucsic")
+# create data example
+song = [
     {'my_song_id': 1, 'my_name': 'Song 1', 'my_description': 'description 1', 'my_type_id': 1},
-    {'my_song_id': 2, 'my_name': 'Song 2', 'my_description': 'description 2', 'my_type_id': 2}
+    # {'my_song_id': 2, 'my_name': 'Song 2', 'my_description': 'description 2', 'my_type_id': 2}
 ]
 
 
-# Lấy danh sách tất cả các MySong
-@app.route('/MySong', methods=['GET'])
-def get_MySong():
-    return jsonify(MySong)
+# Get a list of all songs
+@app.route('/song', methods=['GET'])
+def get_song():
+    return jsonify(song)
 
 
-# Lấy một MySong theo ID
-@app.route('/MySong/<int:song_id>', methods=['GET'])
+# Get a song by ID
+@app.route('/song/<int:song_id>', methods=['GET'])
 def get_track(song_id):
-    track = [track for track in MySong if track['my_song_id'] == song_id]
+    track = [track for track in song if track['my_song_id'] == song_id]
     if len(track) == 0:
         abort(404)
     return jsonify(track[0])
 
 
-# Thêm một MySong mới
-@app.route('/MySong', methods=['POST'])
+# Add a new song
+@app.route('/song', methods=['POST'])
 def create_track():
     if not request.json or not 'my_song_id' in request.json:
         abort(400)
-    track = {
-        'my_song_id': MySong[-1]['my_song_id'] + 1,
-        'my_name': request.json['my_name'],
-        'my_description': request.json['my_description'],
-        'my_type_id': MySong[-1]['my_type_id'] + 1
-    }
-    # MySong = [
+
+    cursor = collections.cursor()
+
+    sql_insert = "INSERT INTO tbl_song(my_song_id, my_name, my_description, my_type_id) VALUES(%s, %s, %s, %s)"
+    track = (
+        "'my_song_id': song[-1]['my_song_id'] + 1",
+        "'my_name': request.json['my_name']",
+        "'m_description': request.json['my_description']",
+        "'my_type_id': song[-1]['my_type_id'] + 1"
+    )
+    sql = cursor.execute(sql_insert, track)
+    collections.commit()
+    # mysong = [
     #     {'my_song_id': 1, 'my_name': 'Song 1', 'my_description': 'description 1', 'my_type_id': 1},
     #     {'my_song_id': 2, 'my_name': 'Song 2', 'my_description': 'description 2', 'my_type_id': 2}
     # ]
-    MySong.append(track)
-    return jsonify({'track': track}), 201
+    print(collections.rowcount, "was inserted.")
+    song.append(sql)
+    return jsonify({'sql': sql}), 201
 
 
-# Cập nhật thông tin của một MySong theo ID
-@app.route('/MySong/<int:song_id>', methods=['PUT'])
+# Update information of a song by ID
+@app.route('/song/<int:song_id>', methods=['PUT'])
 def update_track(song_id):
-    track = [track for track in MySong if track['my_song_id'] == song_id]
+    track = [track for track in song if track['my_song_id'] == song_id]
     if len(track) == 0:
         abort(404)
     if not request.json:
@@ -57,13 +65,13 @@ def update_track(song_id):
     return jsonify({'track': track[0]})
 
 
-# Xóa một MySong theo ID
-@app.route('/MySong/<int:song_id>', methods=['DELETE'])
+# Delete a song by ID
+@app.route('/song/<int:song_id>', methods=['DELETE'])
 def delete_track(song_id):
-    track = [track for track in MySong if track['my_song_id'] == song_id]
+    track = [track for track in song if track['my_song_id'] == song_id]
     if len(track) == 0:
         abort(404)
-    MySong.remove(track[0])
+    song.remove(track[0])
     return jsonify({'result': True})
 
 
