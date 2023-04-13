@@ -27,11 +27,13 @@ def get_track(song_id):
 # Thêm một track mới
 @app.route('/MySong', methods=['POST'])
 def create_track():
-    if not request.json or not 'my_name' in request.json:
+    if not request.json or not 'my_song_id' in request.json:
         abort(400)
     track = {
         'my_song_id': MySong[-1]['my_song_id'] + 1,
         'my_name': request.json['my_name'],
+        'my_description': request.json['my_description'],
+        # 'my_type_id': MySong[-1]['my_type_id'] + 1,
     }
     MySong.append(track)
     return jsonify({'track': track}), 201
