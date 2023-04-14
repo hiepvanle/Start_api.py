@@ -1,5 +1,7 @@
 from flask import Flask, jsonify, request, abort
 
+
+
 app = Flask(__name__)
 
 # Tạo dữ liệu ví dụ
