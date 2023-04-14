@@ -3,7 +3,7 @@ import pymysql
 
 app = Flask(__name__)
 collections = pymysql.connect(host="localhost", user="root", password="0397495785Ab@", db="mymucsic")
-# create data example
+# Create data example
 song = [
     {'my_song_id': 1, 'my_name': 'Song 1', 'my_description': 'description 1', 'my_type_id': 1},
     # {'my_song_id': 2, 'my_name': 'Song 2', 'my_description': 'description 2', 'my_type_id': 2}

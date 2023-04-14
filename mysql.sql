@@ -40,7 +40,7 @@
 #
 #
 # create table tbl_writer (
-#  	writer_id int primary key,
+#  	writer_id int not null primary key,
 #   	name varchar(100) not null,
 # 	description varchar(255)
 # );
