@@ -8,7 +8,7 @@ writers = [
     {'writer_id': 2, 'name': 'Writer 2', 'description': 'description 2'}
 ]
 
-# Get a list of all songs
+# Get a list of all writer
 @app.route('/writer', methods=['GET'])
 def get_writers():
     return jsonify(writers)

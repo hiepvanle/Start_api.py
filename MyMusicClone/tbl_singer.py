@@ -2,68 +2,67 @@ from flask import Flask, jsonify, request, abort
 
 app = Flask(__name__)
 
-# Tạo dữ liệu ví dụ
-MySong = [
-    {'my_song_id': 1, 'my_name': 'Song 1', 'my_description': 'description 1', 'my_type_id': 1},
-    {'my_song_id': 2, 'my_name': 'Song 2', 'my_description': 'description 2', 'my_type_id': 2}
+
+MySinger = [
+    {'singer_id': 1, 'name': 'Singer 1', 'hometown': 'Hanoi', 'day_of_birth': '1990-01-01', 'description': 'description 1'},
+    {'singer_id': 2, 'name': 'Singer 2', 'hometown': 'HCMC', 'day_of_birth': '1995-02-02', 'description': 'description 2'}
 ]
 
 
-# Lấy danh sách tất cả các MySong
-@app.route('/MySong', methods=['GET'])
-def get_MySong():
-    return jsonify(MySong)
+
+@app.route('/MySinger', methods=['GET'])
+def get_MySinger():
+    return jsonify(MySinger)
 
 
-# Lấy một MySong theo ID
-@app.route('/MySong/<int:song_id>', methods=['GET'])
-def get_track(song_id):
-    track = [track for track in MySong if track['my_song_id'] == song_id]
-    if len(track) == 0:
+
+@app.route('/MySinger/<int:singer_id>', methods=['GET'])
+def get_singer(singer_id):
+    singer = [singer for singer in MySinger if singer['singer_id'] == singer_id]
+    if len(singer) == 0:
         abort(404)
-    return jsonify(track[0])
+    return jsonify(singer[0])
 
 
-# Thêm một MySong mới
-@app.route('/MySong', methods=['POST'])
-def create_track():
-    if not request.json or not 'my_song_id' in request.json:
+
+@app.route('/MySinger', methods=['POST'])
+def create_singer():
+    if not request.json or not 'singer_id' in request.json:
         abort(400)
-    track = {
-        'my_song_id': MySong[-1]['my_song_id'] + 1,
-        'my_name': request.json['my_name'],
-        'my_description': request.json['my_description'],
-        'my_type_id': MySong[-1]['my_type_id'] + 1
+    singer = {
+        'singer_id': MySinger[-1]['singer_id'] + 1,
+        'name': request.json['name'],
+        'hometown': request.json['hometown'],
+        'day_of_birth': request.json['day_of_birth'],
+        'description': request.json['description']
     }
-    # MySong = [
-    #     {'my_song_id': 1, 'my_name': 'Song 1', 'my_description': 'description 1', 'my_type_id': 1},
-    #     {'my_song_id': 2, 'my_name': 'Song 2', 'my_description': 'description 2', 'my_type_id': 2}
-    # ]
-    MySong.append(track)
-    return jsonify({'track': track}), 201
+    MySinger.append(singer)
+    return jsonify({'singer': singer}), 201
 
 
-# Cập nhật thông tin của một MySong theo ID
-@app.route('/MySong/<int:song_id>', methods=['PUT'])
-def update_track(song_id):
-    track = [track for track in MySong if track['my_song_id'] == song_id]
-    if len(track) == 0:
+
+@app.route('/MySinger/<int:singer_id>', methods=['PUT'])
+def update_singer(singer_id):
+    singer = [singer for singer in MySinger if singer['singer_id'] == singer_id]
+    if len(singer) == 0:
         abort(404)
     if not request.json:
         abort(400)
-    track[0]['my_name'] = request.json.get('my_name', track[0]['my_name'])
-    track[1]['my_description'] = request.json.get('my_description', track[1]['my_description'])
+    singer[0]['name'] = request.json.get('name', singer[0]['name'])
+    singer[0]['hometown'] = request.json.get('hometown', singer[0]['hometown'])
+    singer[0]['day_of_birth'] = request.json.get('day_of_birth', singer[0]['day_of_birth'])
+    singer[0]['description'] = request.json.get('description', singer[0]['description'])
 
-    return jsonify({'track': track[0]})
+    return jsonify({'singer': singer[0]})
 
 
-# Xóa một MySong theo ID
-@app.route('/MySong/<int:song_id>', methods=['DELETE'])
-def delete_track(song_id):
-    track = [track for track in MySong if track['my_song_id'] == song_id]
-    if len(track) == 0:
+
+@app.route('/MySinger/<int:singer_id>', methods=['DELETE'])
+def delete_singer(singer_id):
+    singer = [singer for singer in MySinger if singer['singer_id'] == singer_id]
+    if len(singer) == 0:
         abort(404)
-    MySong.remove(track[0])
+    MySinger.remove(singer[0])
     return jsonify({'result': True})
 
 
