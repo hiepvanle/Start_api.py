@@ -1,0 +1,10 @@
+{
+
+  "DATABASE_00": {
+      "host":"1",
+      "user":"1",
+      "password":"1",
+      "db":"mymusic"
+  }
+
+}
