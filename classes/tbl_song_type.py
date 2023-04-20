@@ -1,73 +1,98 @@
-from flask import Flask, jsonify, request, abort
+from flask import request
+from flask_restful import Resource
+
+from classes.utils import command_format
 
 
+class Song_type(Resource):
+    def __init__(self, **kwargs):
+        self.connection = kwargs['connection']
 
-app = Flask(__name__)
+    def get(self):
+        if request.json is not None or request.json != "":
+            with self.connection.cursor() as cursor:
+                # get all
+                if request.args['type_id'] == "*":
+                    drive = []
+                    sql = "SELECT * FROM 'tbl_song_type'"
+                    cursor.execute(sql)
+                    result = cursor.fetchall()
+                    for i in result:
+                        data = {
+                            'type_id': i[0],
+                            'type_name': i[1],
+                            'type_description': i[2],
+                            'listen_count': i[3],
+                            'rate_1_star': i[4],
+                            'rate_2_star': i[5],
+                            'rate_3_star': i[6],
+                            'rate_4_star': i[7],
+                            'rate_5_star': i[8],
+                        }
+                        drive.append(data)
+                    return drive, 200
 
-# Tạo dữ liệu ví dụ
-MySong = [
-    {'my_song_id': 1, 'my_name': 'Song 1', 'my_description': 'description 1', 'my_type_id': 1},
-    {'my_song_id': 2, 'my_name': 'Song 2', 'my_description': 'description 2', 'my_type_id': 2}
-]
+                # get by id
+                else:
+                    sql = "SELECT * FROM 'tbl_song_type' WHERE 'type_id'=%s"
+                    cursor.execute(sql, (request.args['type_id']))
+                    result = cursor.fetchone()
+                    data = {
+                        'type_id': result[0],
+                        'type_name': result[1],
+                        'type_description': result[2],
+                        'listen_count': result[3],
+                        'rate_1_star': result[4],
+                        'rate_2_star': result[5],
+                        'rate_3_star': result[6],
+                        'rate_4_star': result[7],
+                        'rate_5_star': result[8],
+                    }
+                    return data, 200
+        else:
+            return {"status": "error"}
 
+    def post(self):
+        if request.is_json:
+            # convert to json
+            data = request.get_json(force=True)
+            with self.connection.cursor() as cursor:
+                sql_insert = "INSERT INTO 'tbl_song_type' ('type_id', 'type_name', 'type_description', " \
+                             "'listen_count', 'rate_1_star'," \
+                             " 'rate_2_star', 'rate_3_star', 'rate_4_star', 'rate_5_star', ) " \
+                             "VALUES ('{}', '{}','{}', '{}', '{}', '{}', '{}', '{}', '{}', );"
+                sql_post = sql_insert.format(data['type_id'], data['type_name'], data['type_description'],
+                                             data['listen_count'], data['rate_1_star'], data['rate_2_star'],
+                                             data['rate_3_star'], data['rate_4_star'], data['rate_5_star'])
+                cursor.execute(sql_post)
+                self.connection.commit()
+            return {'status': 'success'}, 200
+        else:
+            return {"status": "error"}
 
-# Lấy danh sách tất cả các MySong
-@app.route('/MySong', methods=['GET'])
-def get_MySong():
-    return jsonify(MySong)
+    def delete(self):
+        if request.is_json:
+            # convert to json
+            data = request.get_json(force=True)
+            type_id = data['type_id']
+            with self.connection.cursor() as cursor:
+                sql_delete = "DELETE FROM 'tbl_song_type' WHERE 'type_id'=%s"
+                # Execute the query
+                cursor.execute(sql_delete, type_id)
+                # the connection is not autocommit by default. So we must commit to save our changes.
+                self.connection.commit()
+            return {"status": "success"}, 200
+        else:
+            return {"status": "error"}
 
-
-# Lấy một MySong theo ID
-@app.route('/MySong/<int:song_id>', methods=['GET'])
-def get_track(song_id):
-    track = [track for track in MySong if track['my_song_id'] == song_id]
-    if len(track) == 0:
-        abort(404)
-    return jsonify(track[0])
-
-
-# Thêm một MySong mới
-@app.route('/MySong', methods=['POST'])
-def create_track():
-    if not request.json or not 'my_song_id' in request.json:
-        abort(400)
-    track = {
-        'my_song_id': MySong[-1]['my_song_id'] + 1,
-        'my_name': request.json['my_name'],
-        'my_description': request.json['my_description'],
-        'my_type_id': MySong[-1]['my_type_id'] + 1
-    }
-    # MySong = [
-    #     {'my_song_id': 1, 'my_name': 'Song 1', 'my_description': 'description 1', 'my_type_id': 1},
-    #     {'my_song_id': 2, 'my_name': 'Song 2', 'my_description': 'description 2', 'my_type_id': 2}
-    # ]
-    MySong.append(track)
-    return jsonify({'track': track}), 201
-
-
-# Cập nhật thông tin của một MySong theo ID
-@app.route('/MySong/<int:song_id>', methods=['PUT'])
-def update_track(song_id):
-    track = [track for track in MySong if track['my_song_id'] == song_id]
-    if len(track) == 0:
-        abort(404)
-    if not request.json:
-        abort(400)
-    track[0]['my_name'] = request.json.get('my_name', track[0]['my_name'])
-    track[1]['my_description'] = request.json.get('my_description', track[1]['my_description'])
-
-    return jsonify({'track': track[0]})
-
-
-# Xóa một MySong theo ID
-@app.route('/MySong/<int:song_id>', methods=['DELETE'])
-def delete_track(song_id):
-    track = [track for track in MySong if track['my_song_id'] == song_id]
-    if len(track) == 0:
-        abort(404)
-    MySong.remove(track[0])
-    return jsonify({'result': True})
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
+    def put(self):
+        if request.is_json:
+            # convert to json
+            data = request.get_json(force=True)
+            sql_put = "update tbl_song_type set {} where {};"
+            with self.connection.cursor() as cursor:
+                cursor.execute(command_format(data, sql_put))
+                self.connection.commit()
+            return {'status': 'success'}, 200
+        else:
+            return {"status": "error"}

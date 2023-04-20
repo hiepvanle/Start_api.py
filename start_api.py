@@ -1,13 +1,29 @@
 from flask import Flask
 from flask_restful import Api
-import pymysql
 from classes.tbl_song import Song
+from classes.tbl_song_type import Song_type
+from classes.tbl_song_writer import Song_writer
+from classes.tbl_album import Album
+from classes.tbl_singer import Singer
+from classes.tbl_writer import Writer
+from classes.tbl_play import Play
+import pymysql
+from classes.utils import read_config
+
+conf = read_config()
 
 app = Flask(__name__)
 api = Api(app)
-connections = pymysql.connect(host='localhost', user='root', password='0397495785Ab@', db='mymucsic')
+connections = pymysql.connect(host=conf['DATABASE_00']['host'], user=conf['DATABASE_00']['user'],
+                              password=conf['DATABASE_00']['password'], db=conf['DATABASE_00']['db'])
 
-api.add_resource(Song, '/song', resouces_class_args={"connection": connections})
+api.add_resource(Song, '/song', resouces_class_kwargs={"connection": connections})
+api.add_resource(Song_type, '/song_type', resouces_class_kwargs={"connection": connections})
+api.add_resource(Song_writer, '/song_writer', resouces_class_kwargs={"connection": connections})
+api.add_resource(Album, '/album', resouces_class_kwargs={"connection": connections})
+api.add_resource(Singer, '/singer', resouces_class_kwargs={"connection": connections})
+api.add_resource(Writer, '/writer', resouces_class_kwargs={"connection": connections})
+api.add_resource(Play, '/play', resouces_class_kwargs={"connection": connections})
 
 if __name__ == '__main__':
     app.run(debug=True)

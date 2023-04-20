@@ -2,9 +2,9 @@
 
   "DATABASE_00": {
       "host":"localhost",
-      "user":"1",
-      "password":"1",
-      "db":"mymusic"
+      "user":"root",
+      "password":"0397495784Ab@",
+      "db":"mymucsic"
   }
 
 }
