@@ -12,14 +12,14 @@ class Play(Resource):
         if request.json is not None or request.json != "":
             with self.connection.cursor() as cursor:
                 # get all
-                if request.args['play_id'] == "*":
+                if request.args['begin_id'] == "*":
                     drive = []
-                    sql = "SELECT * FROM 'tbl_play'"
+                    sql = "SELECT * FROM 'tbl_begin'"
                     cursor.execute(sql)
                     result = cursor.fetchall()
                     for i in result:
                         data = {
-                            'play_id': i[0],
+                            'begin_id': i[0],
                             'song_id': i[1],
                             'singer_id': i[2],
                             'album_id': i[3],
@@ -31,11 +31,11 @@ class Play(Resource):
 
                 # get by id
                 else:
-                    sql = "SELECT * FROM 'tbl_play' WHERE 'play_id'=%s"
-                    cursor.execute(sql, (request.args['play_id']))
+                    sql = "SELECT * FROM 'tbl_begin' WHERE 'begin_id'=%s"
+                    cursor.execute(sql, (request.args['begin_id']))
                     result = cursor.fetchone()
                     data = {
-                        'play_id': result[0],
+                        'begin_id': result[0],
                         'song_id': result[1],
                         'singer_id': result[2],
                         'album_id': result[3],

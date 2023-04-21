@@ -6,7 +6,7 @@ from classes.tbl_song_writer import Song_writer
 from classes.tbl_album import Album
 from classes.tbl_singer import Singer
 from classes.tbl_writer import Writer
-from classes.tbl_play import Play
+from classes.tbl_begin import Play
 import pymysql
 from classes.utils import read_config
 
@@ -23,7 +23,7 @@ api.add_resource(Song_writer, '/song_writer', resouces_class_kwargs={"connection
 api.add_resource(Album, '/album', resouces_class_kwargs={"connection": connections})
 api.add_resource(Singer, '/singer', resouces_class_kwargs={"connection": connections})
 api.add_resource(Writer, '/writer', resouces_class_kwargs={"connection": connections})
-api.add_resource(Play, '/play', resouces_class_kwargs={"connection": connections})
+api.add_resource(Play, '/begin', resouces_class_kwargs={"connection": connections})
 
 if __name__ == '__main__':
     app.run(debug=True)

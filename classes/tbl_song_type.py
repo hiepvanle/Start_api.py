@@ -22,12 +22,6 @@ class Song_type(Resource):
                             'type_id': i[0],
                             'type_name': i[1],
                             'type_description': i[2],
-                            'listen_count': i[3],
-                            'rate_1_star': i[4],
-                            'rate_2_star': i[5],
-                            'rate_3_star': i[6],
-                            'rate_4_star': i[7],
-                            'rate_5_star': i[8],
                         }
                         drive.append(data)
                     return drive, 200

@@ -8,6 +8,7 @@ class Song(Resource):
     def __init__(self, **kwargs):
         self.connection = kwargs['connection']
 
+    # get datax
     def get(self):
         if request.json is not None or request.json != "":
             with self.connection.cursor() as cursor:
@@ -23,6 +24,8 @@ class Song(Resource):
                             'song_name': i[1],
                             'song_writer_id': i[2],
                             'type_id': i[3],
+                            'listen_count': i[4],
+                            'rate': i[5],
                         }
                         drive.append(data)
                     return drive, 200
@@ -37,6 +40,8 @@ class Song(Resource):
                         'song_name': result[1],
                         'song_writer_id': result[2],
                         'type_id': result[3],
+                        'listen_count': result[4],
+                        'rate': result[5],
                     }
                     return data, 200
         else:
@@ -47,9 +52,11 @@ class Song(Resource):
             # convert to json
             data = request.get_json(force=True)
             with self.connection.cursor() as cursor:
-                sql_insert = "INSERT INTO 'tbl_song' ('song_id', 'song_name', 'song_writer_id', 'type_id') " \
-                           "VALUES ('{}', '{}','{}', '{}');"
-                sql_post = sql_insert.format(data['song_id'], data['song_name'], data['song_writer_id'], data['type_id'])
+                sql_insert = "INSERT INTO 'tbl_song' ('song_id', 'song_name', 'song_writer_id', 'type_id', " \
+                             "'listen_count', 'rate') " \
+                             "VALUES ('{}', '{}','{}', '{}', '{}', '{}');"
+                sql_post = sql_insert.format(data['song_id'], data['song_name'], data['song_writer_id'],
+                                             data['type_id'], data['listen_count'], data['rate'])
                 cursor.execute(sql_post)
                 self.connection.commit()
             return {'status': 'success'}, 200
