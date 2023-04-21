@@ -4,7 +4,7 @@ from flask_restful import Resource
 from classes.utils import command_format
 
 
-class Play(Resource):
+class Begin(Resource):
     def __init__(self, **kwargs):
         self.connection = kwargs['connection']
 
