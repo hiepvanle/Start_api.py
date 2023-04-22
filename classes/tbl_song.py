@@ -10,12 +10,12 @@ class Song(Resource):
 
     # get datax
     def get(self):
-        if request.json is not None or request.json != "":
+        if request.get_json is not None or request.get_json != "":
             with self.connection.cursor() as cursor:
                 # get all
                 if request.args['song_id'] == "*":
                     drive = []
-                    sql = "SELECT * FROM 'tbl_song'"
+                    sql = "SELECT * FROM tbl_song"
                     cursor.execute(sql)
                     result = cursor.fetchall()
                     for i in result:
@@ -32,7 +32,7 @@ class Song(Resource):
 
                 # get by id
                 else:
-                    sql = "SELECT * FROM 'tbl_song' WHERE 'song_id'=%s"
+                    sql = "SELECT * FROM tbl_song WHERE song_id=%s"
                     cursor.execute(sql, (request.args['song_id']))
                     result = cursor.fetchone()
                     data = {
