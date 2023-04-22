@@ -43,11 +43,12 @@ class Writer(Resource):
     def post(self):
         if request.is_json:
             # convert to json
-            data = request.get_json(force=True)
+            data = request.get_json(force=True)["data"]
             with self.connection.cursor() as cursor:
-                sql_insert = "INSERT INTO 'tbl_writer' ('write_id', 'writer_name', 'writer_description') " \
+                sql_insert = "INSERT INTO tbl_writer (write_id, writer_name, writer_description) " \
                            "VALUES ('{}', '{}','{}');"
                 sql_post = sql_insert.format(data['write_id'], data['writer_name'], data['writer_description'])
+                print(sql_post)
                 cursor.execute(sql_post)
                 self.connection.commit()
             return {'status': 'success'}, 200
@@ -57,7 +58,7 @@ class Writer(Resource):
     def delete(self):
         if request.is_json:
             # convert to json
-            data = request.get_json(force=True)
+            data = request.get_json(force=True)["data"]
             writer_id = data['writer_id']
             with self.connection.cursor() as cursor:
                 sql_delete = "DELETE FROM 'tbl_writer' WHERE 'write_id'=%s"
