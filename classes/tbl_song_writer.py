@@ -21,7 +21,7 @@ class Song_writer(Resource):
                         data = {
                             'song_writer_id': i[0],
                             'writer_date': i[1],
-                            'writer_id': i[3],
+                            'write_id': i[3],
                         }
                         drive.append(data)
                     return drive, 200
@@ -34,7 +34,7 @@ class Song_writer(Resource):
                     data = {
                         'song_writer_id': result[0],
                         'writer_date': result[1],
-                        'writer_id': result[3],
+                        'write_id': result[3],
                     }
                     return data, 200
         else:
@@ -43,11 +43,12 @@ class Song_writer(Resource):
     def post(self):
         if request.is_json:
             # convert to json
-            data = request.get_json(force=True)
+            data = request.get_json(force=True)["data"]
             with self.connection.cursor() as cursor:
-                sql_insert = "INSERT INTO 'tbl_song_writer' ('song_writer_id', 'writer_date', 'writer_id') " \
+                sql_insert = "INSERT INTO tbl_song_writer (song_writer_id, writer_date, write_id) " \
                            "VALUES ('{}', '{}','{}');"
-                sql_post = sql_insert.format(data['song_writer_id'], data['writer_date'], data['writer_id'])
+                sql_post = sql_insert.format(data['song_writer_id'], data['writer_date'], data['write_id'])
+                print(sql_post)
                 cursor.execute(sql_post)
                 self.connection.commit()
             return {'status': 'success'}, 200

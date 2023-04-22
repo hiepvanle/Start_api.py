@@ -47,13 +47,14 @@ class Singer(Resource):
     def post(self):
         if request.is_json:
             # convert to json
-            data = request.get_json(force=True)
+            data = request.get_json(force=True)["data"]
             with self.connection.cursor() as cursor:
-                sql_insert = "INSERT INTO 'tbl_singer' ('singer_id', 'singer_name', 'singer_description', 'hometown', "\
-                             "'date_of_birth') " \
+                sql_insert = "INSERT INTO tbl_singer (singer_id, singer_name, singer_description, hometown, "\
+                             "date_of_birth) " \
                              "VALUES ('{}', '{}','{}', '{}', '{}');"
                 sql_post = sql_insert.format(data['singer_id'], data['singer_name'], data['singer_description'],
                                              data['hometown'], data['date_of_birth'])
+                print(sql_post)
                 cursor.execute(sql_post)
                 self.connection.commit()
             return {'status': 'success'}, 200

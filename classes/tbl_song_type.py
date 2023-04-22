@@ -43,11 +43,12 @@ class Song_type(Resource):
     def post(self):
         if request.is_json:
             # convert to json
-            data = request.get_json(force=True)
+            data = request.get_json(force=True)["data"]
             with self.connection.cursor() as cursor:
-                sql_insert = "INSERT INTO 'tbl_song_type' ('type_id', 'type_name', 'type_description'" \
+                sql_insert = "INSERT INTO tbl_song_type (type_id, type_name, type_description)" \
                              "VALUES ('{}', '{}','{}');"
                 sql_post = sql_insert.format(data['type_id'], data['type_name'], data['type_description'])
+                print(sql_post)
                 cursor.execute(sql_post)
                 self.connection.commit()
             return {'status': 'success'}, 200

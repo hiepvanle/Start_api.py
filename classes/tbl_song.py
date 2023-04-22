@@ -47,17 +47,20 @@ class Song(Resource):
         else:
             return {"status": "error"}, 404
 
+    # @property
     @property
     def post(self):
         if request.is_json:
             # convert to json
-            data = request.get_json(force=True)
+            data = request.get_json(force=True)["data"]
+
             with self.connection.cursor() as cursor:
-                sql_insert = "INSERT INTO 'tbl_song' ('song_id', 'song_name', 'song_writer_id', 'type_id', " \
-                             "'listen_count', 'rate') " \
+                sql_insert = "INSERT INTO tbl_song (song_id, song_name, song_writer_id, type_id, " \
+                             "listen_count, rate) " \
                              "VALUES ('{}', '{}','{}', '{}', '{}', '{}')"
                 sql_post = sql_insert.format(data['song_id'], data['song_name'], data['song_writer_id'],
                                              data['type_id'], data['listen_count'], data['rate'])
+                print(sql_post)
                 cursor.execute(sql_post)
                 self.connection.commit()
             return {'status': 'success'}, 200

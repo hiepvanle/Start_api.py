@@ -45,12 +45,13 @@ class Album(Resource):
     def post(self):
         if request.is_json:
             # convert to json
-            data = request.get_json(force=True)
+            data = request.get_json(force=True)["data"]
             with self.connection.cursor() as cursor:
-                sql_insert = "INSERT INTO 'tbl_album' ('album_id', 'album_name', 'album_description', 'album_date') " \
+                sql_insert = "INSERT INTO tbl_album (album_id, album_name, album_description, album_date) " \
                            "VALUES ('{}', '{}','{}', '{}');"
                 sql_post = sql_insert.format(data['album_id'], data['album_name'], data['album_description'],
                                              data['album_date'])
+                print(sql_post)
                 cursor.execute(sql_post)
                 self.connection.commit()
             return {'status': 'success'}, 200
