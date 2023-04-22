@@ -43,3 +43,20 @@ class Begin(Resource):
                     return data, 200
         else:
             return {"status": "error"}, 404
+
+    def post(self):
+        if request.is_json:
+            # convert to json
+            data = request.get_json(force=True)["data"]
+
+            with self.connection.cursor() as cursor:
+                sql_insert = "INSERT INTO tbl_begin (begin_id, date, location, song_id, album_id, singer_id) " \
+                             "VALUES ('{}', '{}','{}', '{}', '{}', '{}')"
+                sql_post = sql_insert.format(data['begin_id'], data['date'], data['location'],
+                                             data['song_id'], data['album_id'], data['singer_id'])
+                print(sql_post)
+                cursor.execute(sql_post)
+                self.connection.commit()
+            return {'status': 'success'}, 200
+        else:
+            return {"status": "error"}, 404
