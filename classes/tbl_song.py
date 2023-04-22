@@ -45,7 +45,7 @@ class Song(Resource):
                     }
                     return data, 200
         else:
-            return {"status": "error"}
+            return {"status": "error"}, 404
 
     def post(self):
         if request.is_json:
@@ -61,7 +61,7 @@ class Song(Resource):
                 self.connection.commit()
             return {'status': 'success'}, 200
         else:
-            return {"status": "error"}
+            return {"status": "error"}, 404
 
     def delete(self):
         if request.is_json:
@@ -76,7 +76,7 @@ class Song(Resource):
                 self.connection.commit()
             return {"status": "success"}, 200
         else:
-            return {"status": "error"}
+            return {"status": "error"}, 404
 
     def put(self):
         if request.is_json:
@@ -88,4 +88,4 @@ class Song(Resource):
                 self.connection.commit()
             return {'status': 'success'}, 200
         else:
-            return {"status": "error"}
+            return {"status": "error"}, 404

@@ -35,34 +35,24 @@ class Song_type(Resource):
                         'type_id': result[0],
                         'type_name': result[1],
                         'type_description': result[2],
-                        'listen_count': result[3],
-                        'rate_1_star': result[4],
-                        'rate_2_star': result[5],
-                        'rate_3_star': result[6],
-                        'rate_4_star': result[7],
-                        'rate_5_star': result[8],
                     }
                     return data, 200
         else:
-            return {"status": "error"}
+            return {"status": "error"}, 404
 
     def post(self):
         if request.is_json:
             # convert to json
             data = request.get_json(force=True)
             with self.connection.cursor() as cursor:
-                sql_insert = "INSERT INTO 'tbl_song_type' ('type_id', 'type_name', 'type_description', " \
-                             "'listen_count', 'rate_1_star'," \
-                             " 'rate_2_star', 'rate_3_star', 'rate_4_star', 'rate_5_star', ) " \
-                             "VALUES ('{}', '{}','{}', '{}', '{}', '{}', '{}', '{}', '{}', );"
-                sql_post = sql_insert.format(data['type_id'], data['type_name'], data['type_description'],
-                                             data['listen_count'], data['rate_1_star'], data['rate_2_star'],
-                                             data['rate_3_star'], data['rate_4_star'], data['rate_5_star'])
+                sql_insert = "INSERT INTO 'tbl_song_type' ('type_id', 'type_name', 'type_description'" \
+                             "VALUES ('{}', '{}','{}');"
+                sql_post = sql_insert.format(data['type_id'], data['type_name'], data['type_description'])
                 cursor.execute(sql_post)
                 self.connection.commit()
             return {'status': 'success'}, 200
         else:
-            return {"status": "error"}
+            return {"status": "error"}, 404
 
     def delete(self):
         if request.is_json:
@@ -77,7 +67,7 @@ class Song_type(Resource):
                 self.connection.commit()
             return {"status": "success"}, 200
         else:
-            return {"status": "error"}
+            return {"status": "error"}, 404
 
     def put(self):
         if request.is_json:
@@ -89,4 +79,4 @@ class Song_type(Resource):
                 self.connection.commit()
             return {'status': 'success'}, 200
         else:
-            return {"status": "error"}
+            return {"status": "error"}, 404

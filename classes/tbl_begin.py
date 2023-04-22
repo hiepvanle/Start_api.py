@@ -1,8 +1,6 @@
 from flask import request
 from flask_restful import Resource
 
-from classes.utils import command_format
-
 
 class Begin(Resource):
     def __init__(self, **kwargs):
@@ -44,4 +42,4 @@ class Begin(Resource):
                     }
                     return data, 200
         else:
-            return {"status": "error"}
+            return {"status": "error"}, 404
