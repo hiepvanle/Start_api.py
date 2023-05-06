@@ -1,5 +1,6 @@
 from flask import request
 from flask_restful import Resource
+from classes.utils import command_format
 
 
 class Begin(Resource):
@@ -12,7 +13,7 @@ class Begin(Resource):
                 # get all
                 if request.args['begin_id'] == "*":
                     drive = []
-                    sql = "SELECT * FROM 'tbl_begin'"
+                    sql = "SELECT * FROM tbl_begin"
                     cursor.execute(sql)
                     result = cursor.fetchall()
                     for i in result:
@@ -24,12 +25,12 @@ class Begin(Resource):
                             'date': i[4],
                             'location': i[5],
                         }
-                        drive.append(data)
-                    return drive, 200
+                        da = drive.append(data)
+                    return da, 200
 
                 # get by id
                 else:
-                    sql = "SELECT * FROM 'tbl_begin' WHERE 'begin_id'=%s"
+                    sql = "SELECT * FROM tbl_begin WHERE begin_id=%s"
                     cursor.execute(sql, (request.args['begin_id']))
                     result = cursor.fetchone()
                     data = {
@@ -56,6 +57,33 @@ class Begin(Resource):
                                              data['song_id'], data['album_id'], data['singer_id'])
                 print(sql_post)
                 cursor.execute(sql_post)
+                self.connection.commit()
+            return {'status': 'success'}, 200
+        else:
+            return {"status": "error"}, 404
+
+    def delete(self):
+        if request.is_json:
+            # convert to json
+            data = request.get_json(force=True)
+            begin_id = data['begin_id']
+            with self.connection.cursor() as cursor:
+                sql_delete = "DELETE FROM tbl_begin WHERE begin_id=%s"
+                # Execute the query
+                cursor.execute(sql_delete, begin_id)
+                # the connection is not autocommit by default. So we must commit to save our changes.
+                self.connection.commit()
+            return {"status": "success"}, 200
+        else:
+            return {"status": "error"}, 404
+
+    def put(self):
+        if request.is_json:
+            # convert to json
+            data = request.get_json(force=True)
+            sql_put = "update tbl_begin set {} where {};"
+            with self.connection.cursor() as cursor:
+                cursor.execute(command_format(data, sql_put))
                 self.connection.commit()
             return {'status': 'success'}, 200
         else:

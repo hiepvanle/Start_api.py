@@ -32,7 +32,7 @@ class Song(Resource):
 
                 # get by id
                 else:
-                    sql = "SELECT * FROM tbl_song WHERE song_id=%s"
+                    sql = "SELECT FROM tbl_song WHERE song_id=%s"
                     cursor.execute(sql, (request.args['song_id']))
                     result = cursor.fetchone()
                     data = {
@@ -47,12 +47,10 @@ class Song(Resource):
         else:
             return {"status": "error"}, 404
 
-    @property
     def post(self):
         if request.is_json:
             # convert to json
             data = request.get_json(force=True)["data"]
-
             with self.connection.cursor() as cursor:
                 sql_insert = "INSERT INTO tbl_song (song_id, song_name, song_writer_id, type_id, " \
                              "listen_count, rate) " \
@@ -72,7 +70,7 @@ class Song(Resource):
             data = request.get_json(force=True)
             song_id = data['song_id']
             with self.connection.cursor() as cursor:
-                sql_delete = "DELETE FROM 'tbl_song' WHERE 'song_id'=%s"
+                sql_delete = "DELETE FROM tbl_song WHERE song_id=%s"
                 # Execute the query
                 cursor.execute(sql_delete, song_id)
                 # the connection is not autocommit by default. So we must commit to save our changes.

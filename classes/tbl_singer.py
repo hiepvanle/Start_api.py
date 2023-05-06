@@ -14,7 +14,7 @@ class Singer(Resource):
                 # get all
                 if request.args['singer_id'] == "*":
                     drive = []
-                    sql = "SELECT * FROM 'tbl_singer'"
+                    sql = "SELECT * FROM tbl_singer"
                     cursor.execute(sql)
                     result = cursor.fetchall()
                     for i in result:
@@ -30,7 +30,7 @@ class Singer(Resource):
 
                 # get by id
                 else:
-                    sql = "SELECT * FROM 'tbl_singer' WHERE 'singer_id'=%s"
+                    sql = "SELECT * FROM tbl_singer WHERE singer_id=%s"
                     cursor.execute(sql, (request.args['singer_id']))
                     result = cursor.fetchone()
                     data = {
@@ -67,7 +67,7 @@ class Singer(Resource):
             data = request.get_json(force=True)
             song_id = data['singer_id']
             with self.connection.cursor() as cursor:
-                sql_delete = "DELETE FROM 'tbl_singer' WHERE 'singer_id'=%s"
+                sql_delete = "DELETE FROM tbl_singer WHERE singer_id=%s"
                 # Execute the query
                 cursor.execute(sql_delete, song_id)
                 # the connection is not autocommit by default. So we must commit to save our changes.

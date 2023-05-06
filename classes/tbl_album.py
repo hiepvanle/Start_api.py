@@ -14,7 +14,7 @@ class Album(Resource):
                 # get all
                 if request.args['album_id'] == "*":
                     drive = []
-                    sql = "SELECT * FROM 'tbl_album'"
+                    sql = "SELECT * FROM tbl_album"
                     cursor.execute(sql)
                     result = cursor.fetchall()
                     for i in result:
@@ -29,7 +29,7 @@ class Album(Resource):
 
                 # get by id
                 else:
-                    sql = "SELECT * FROM 'tbl_album' WHERE 'album_id'=%s"
+                    sql = "SELECT * FROM tbl_album WHERE album_id=%s"
                     cursor.execute(sql, (request.args['album_id']))
                     result = cursor.fetchone()
                     data = {
@@ -64,7 +64,7 @@ class Album(Resource):
             data = request.get_json(force=True)
             song_id = data['album_id']
             with self.connection.cursor() as cursor:
-                sql_delete = "DELETE FROM 'tbl_album' WHERE 'album_id'=%s"
+                sql_delete = "DELETE FROM tbl_album WHERE album_id=%s"
                 # Execute the query
                 cursor.execute(sql_delete, song_id)
                 # the connection is not autocommit by default. So we must commit to save our changes.

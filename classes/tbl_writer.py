@@ -59,9 +59,9 @@ class Writer(Resource):
         if request.is_json:
             # convert to json
             data = request.get_json(force=True)["data"]
-            writer_id = data['writer_id']
+            writer_id = data['write_id']
             with self.connection.cursor() as cursor:
-                sql_delete = "DELETE FROM 'tbl_writer' WHERE 'write_id'=%s"
+                sql_delete = "DELETE FROM tbl_writer WHERE write_id=%s"
                 # Execute the query
                 cursor.execute(sql_delete, writer_id)
                 # the connection is not autocommit by default. So we must commit to save our changes.
