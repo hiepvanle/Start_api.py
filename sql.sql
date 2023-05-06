@@ -22,7 +22,7 @@ CREATE TABLE tbl_song (
     FOREIGN KEY (type_id) REFERENCES tbl_song_type (type_id),
     FOREIGN KEY (song_writer_id) REFERENCES tbl_song_writer (song_writer_id)
     );
-    
+
 CREATE TABLE tbl_song_writer (
   song_writer_id INT NOT NULL,
   write_date DATETIME NOT NULL,
