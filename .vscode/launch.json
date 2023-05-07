@@ -7,8 +7,8 @@
         {
             "type": "msedge",
             "request": "launch",
-            "name": "Open album.html",
-            "file": "c:\\Users\\ACER\\OneDrive\\Máy tính\\MyMusic\\MyMusic\\frontend\\album.html"
+            "name": "Open index.html",
+            "file": "c:\\Users\\ACER\\OneDrive\\Máy tính\\MyMusic\\MyMusic\\index.html"
         }
     ]
 }
