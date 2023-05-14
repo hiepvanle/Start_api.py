@@ -861,7 +861,7 @@ const app = {
                 <div class="charts__container">
                     <div class="grid">
                         <div class="chart__container-header mb-40">
-                            <h3 class="chart__header-name">#zingchart</h3>
+                            <h3 class="chart__header-name">Zingchart</h3>
                             <div class="chart__header-btn">
                                 <i class="bi bi-play-fill chart__header-icon"></i>
                             </div>
