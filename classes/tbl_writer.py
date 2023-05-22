@@ -19,7 +19,7 @@ class Writer(Resource):
                 data = {
                     'write_id': i[0],
                     'writer_name': i[1],
-                    'writer_description': i[3],
+                    'writer_description': i[2],
                 }
                 drive.append(data)
             return jsonify(result)
@@ -33,7 +33,7 @@ class Writer(Resource):
                 data = {
                     'write_id': i[0],
                     'writer_name': i[1],
-                    'writer_description': i[3],
+                    'writer_description': i[2],
                 }
                 drive.append(data)
             return jsonify(result)
