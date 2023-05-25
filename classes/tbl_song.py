@@ -80,7 +80,7 @@ class Song(Resource):
     def put(self):
         if request.is_json:
             # convert to json
-            data = request.get_json(force=True)
+            data = request.get_json(force=True)["data"]
             sql_put = "update tbl_song set {} where {};"
             with self.connections.cursor() as cursor:
                 cursor.execute(command_format(data, sql_put))
