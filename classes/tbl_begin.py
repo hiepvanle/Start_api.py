@@ -1,8 +1,7 @@
 from flask import request, jsonify
 from flask_restful import Resource
 
-# from classes.utils import command_format
-from MyMusic.classes.utils import command_format
+from classes.utils import command_format
 
 
 class Begin(Resource):
