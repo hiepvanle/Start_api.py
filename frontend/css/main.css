@@ -1,0 +1,10 @@
+html {
+    background-size: 1920px auto;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    background: #46595C
+}

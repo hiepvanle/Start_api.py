@@ -8,8 +8,8 @@
         {
             "type": "chrome",
             "request": "launch",
-            "name": "Open index.html",
-            "file": "c:\\Users\\ACER\\OneDrive\\Máy tính\\MyMusic\\MyMusic\\MyMusic\\index.html"
+            "name": "Open main.html",
+            "file": "c:\\Users\\ACER\\OneDrive\\Máy tính\\MyMusic\\MyMusic-1\\frontend\\html\\main.html"
         }
     ]
 }
