@@ -1,9 +1,15 @@
 {
 
-  "DATABASE_00": {
+  "DATABASE_01": {
       "host":"localhost",
       "user":"root",
       "password":"0397495785Ab@",
+      "db":"mymucsic"
+  },
+    "DATABASE_00": {
+      "host":"localhost",
+      "user":"root",
+      "password":"vydeptrai",
       "db":"mymucsic"
   }
 
