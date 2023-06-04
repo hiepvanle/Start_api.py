@@ -9,34 +9,36 @@ class Writer(Resource):
         self.connections = kwargs['connections']
 
     def get(self):
-        if 'write_id' != "":
-            cur = self.connections.cursor()
-            drive = []
-            sql = "SELECT * FROM tbl_writer"
-            cur.execute(sql)
-            result = cur.fetchall()
-            for i in result:
-                data = {
-                    'write_id': i[0],
-                    'writer_name': i[1],
-                    'writer_description': i[2],
-                }
-                drive.append(data)
-            return jsonify(result)
+        if request.query_string is not None or request.query_string != "":
+            with self.connections.cursor() as cursor:
+                # get all
+                if request.args['wid'] == "*":
+                    drive = []
+                    sql = "SELECT * FROM `tbl_writer`"
+                    cursor.execute(sql)
+                    result = cursor.fetchall()
+                    for i in result:
+                        data = {
+                            'write_id': i[0],
+                            'writer_name': i[1],
+                            'writer_description': i[2],
+                        }
+                        drive.append(data)
+                    return drive, 200
+
+                # get by id
+                else:
+                    sql = "SELECT * FROM `tbl_writer` WHERE `write_id`=%s"
+                    cursor.execute(sql, (request.args['wid']))
+                    result = cursor.fetchone()
+                    data = {
+                        'write_id': result[0],
+                        'writer_name': result[1],
+                        'writer_description': result[2],
+                    }
+                    return data, 200
         else:
-            cur = self.connections.cursor()
-            sql = "SELECT * FROM tbl_writer WHERE write_id=%s"
-            drive = []
-            cur.execute(sql, ('write_id',))
-            result = cur.fetchone()
-            for i in result:
-                data = {
-                    'write_id': i[0],
-                    'writer_name': i[1],
-                    'writer_description': i[2],
-                }
-                drive.append(data)
-            return jsonify(result)
+            return {"status": "error"}
 
     def post(self):
         if request.is_json:
