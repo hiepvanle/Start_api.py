@@ -5,28 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyMusic</title>
     <link rel="stylesheet" href="C:\Users\ACER\OneDrive\Máy tính\MyMusic\MyMusic-1\frontend\css\main.css" />
+    <link rel="stylesheet" href="C:\Users\ACER\OneDrive\Máy tính\MyMusic\MyMusic-1\frontend\css\responsive.css"
 </head>
 <body>
-    <div class="main-page">
+    <div class="main-page" style="background-image: url(C:\Users\ACER\OneDrive\Máytính\MyMusic\MyMusic-1\frontend\img\0.svg)">
         <!-- SIDEBAR -->
         <div class="main-sidebar">
             <a href="#"></a>
             <div class="logo"></div>
         </div>
-                <ul>
+            <div class="personal">
+                <ul class="list">
                     <!-- sidebar item -->
-                    <li class="sidebar-item">
+                    <li class="sidebar-item sidebar-item__active js__sidebar-tabs">
                         Cá Nhân
                     </li>
-                    <li class="sidebar-item">
+                    <li class="sidebar-item js__sidebar-tabs">
                         Khám Phá
                     </li>
-                    <li class="sidebar-item">
+                    <li class="sidebar-item js__sidebar-tabs">
                         Theo Dõi
                     </li>
                 </ul>
-                    
-                    <ul>
+            </div>
+            <div class="line"></div>
+            <div class="library">
+                <div class="library-top">    
+                    <ul class="library-top-list list">
                         <!-- sidebar__item--active -->
                         <li class="sidebar-item" >
                             Nhạc Mới
@@ -38,19 +43,23 @@
                             MV
                         </li>
                     </ul>
+                </div> 
+                <div class="library-bot">
+                    <div class="library-bot-heading">
+                        Thư viện
+                    </div>
+            
                 <!-- END SIDEBAR -->
 
-                 <!--CONTAINER 
-                <div class="main-container"> 
-                    header--active 
+                     <!--CONTAINER-->  
+                <div class="container"> 
+                    <!--header--active --> 
                 <div class="header-wraper">
                     <div class="header">
-                        <div class="header__undo mobile-hiden js__sub-color">
-                            <i class="fas fa-arrow-left hover js__toast"></i>
-                            <i class="fas fa-arrow-right hover js__toast header__undo--disble"></i>
+                        <div>
+
                         </div>
-                        <div class="header__width-search js__backgroundColor">
-                            <i class="fas fa-search header__width-search-icon js__sub-color"></i> 
+                        <div class="header__width-search">
                             <input placeholder="Nhập tên bài hát, . . ." type="text" class="header__width-search-input">
 
                             <div class="search-sub">
@@ -101,7 +110,7 @@
                                 </div>
         
                                 <div class="header__right-overlay hiden"></div>
-                                    header__setting--active 
+                                    <!-- header__setting--active --> 
                                 <div class="header__setting mobile-hiden js__sub-color js__backgroundColor">
                                     <i class="fas fa-cog header__setting-icon"></i>
                                     <ul class="header__setting-list">
@@ -155,7 +164,7 @@
 
                                     <div class="music__option">
                                         <ul class="music__option-list js__backgroundColor">
-                                                top-music__option-item 
+                                                <!--top-music__option-item --> 
                                             <li class="tabs-item music__option-item js__main-color music__option-item--active">Tổng quan</li>
                                             <li class="tabs-item music__option-item js__main-color">Bài hát</li>
                                             <li class="tabs-item music__option-item js__main-color">Playlist</li>
@@ -164,7 +173,7 @@
                                                 <i class="fas fa-ellipsis-h"></i>
                                             </li>
                                         </ul>
-                                    </div> -->
+                                    </div> 
 
     
 </body>
