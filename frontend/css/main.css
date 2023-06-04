@@ -1,4 +1,4 @@
-html {
+.main-page {
     background-size: 1920px auto;
     position: fixed;
     top: 0;
@@ -7,4 +7,35 @@ html {
     left: 0;
     overflow: hidden;
     background: #46595C
+}
+
+.main-sidebar{
+    width: var(--sidebar-width);
+    background-color: var(--sidebar-bg);
+    position: fixed;
+    top: 0;
+    bottom: calc(var(--music-control-height) + 54px);
+    left: 0;
+}
+
+.sidebar-item{
+    color: var(--white-color);
+    opacity: 0.8;
+    height: 38px;
+    font-size: 1.3rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    padding-left: var(--side-padding);
+    cursor: pointer;
+}
+
+.logo{
+    width: 240px;
+    height: 70px;
+    background-image: url(https://cdn3.vectorstock.com/i/1000x1000/06/52/music-player-icon-for-logos-websites-and-apps-vector-30290652.jpg);
+    background-size: 30%;
+    background-repeat: no-repeat;
+    background-position-x: 1px;
+    background-position-y: 50%;
 }
