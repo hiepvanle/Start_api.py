@@ -1,6 +1,6 @@
 from flask import request, jsonify
 from flask_restful import Resource
-
+import datetime
 from classes.utils import command_format
 
 
@@ -9,36 +9,40 @@ class Album(Resource):
         self.connections = kwargs['connections']
 
     def get(self):
-        if 'album_id' != "":
-            cur = self.connections.cursor()
-            drive = []
-            sql = "SELECT * FROM tbl_album"
-            cur.execute(sql)
-            result = cur.fetchall()
-            for i in result:
-                data = {
-                    'album_id': i[0],
-                    'album_name': i[1],
-                    'singer_id': i[2],
-                    'album_description': i[3],
-                }
-                drive.append(data)
-            return jsonify(result)
+        if request.query_string is not None or request.query_string != "":
+            with self.connections.cursor() as cursor:
+                # get all
+                if request.args['aid'] == "*":
+                    drive = []
+                    sql = "SELECT * FROM `tbl_album`"
+                    cursor.execute(sql)
+                    result = cursor.fetchall()
+                    for i in result:
+                        data = {
+                            'album_id': i[0],
+                            'album_name': i[1],
+                            'album_description': i[2],
+                            'album_date': i[3].strftime('%Y-%m-%d %H:%M:%S'),  # Convert datetime to string
+                        }
+                        drive.append(data)
+                    return drive, 200
+                # get by id
+                else:
+                    sql = "SELECT * FROM `tbl_album` WHERE `album_id`=%s"
+                    cursor.execute(sql, (request.args['aid'],))
+                    result = cursor.fetchone()
+                    if result is not None:
+                        data = {
+                            'album_id': result[0],
+                            'album_name': result[1],
+                            'album_description': result[2],
+                            'album_date': result[3].strftime('%Y-%m-%d %H:%M:%S'),  # Convert datetime to string
+                        }
+                        return data, 200
+                    else:
+                        return {"status": "not found"}, 404
         else:
-            cur = self.connections.cursor()
-            sql = "SELECT * FROM tbl_album WHERE album_id=%s"
-            drive = []
-            cur.execute(sql, ('album_id',))
-            result = cur.fetchone()
-            for i in result:
-                data = {
-                    'album_id': i[0],
-                    'album_name': i[1],
-                    'singer_id': i[2],
-                    'album_description': i[3],
-                }
-                drive.append(data)
-            return jsonify(result)
+            return {"status": "error"}, 400
 
     def post(self):
         if request.is_json:
@@ -59,17 +63,17 @@ class Album(Resource):
     def delete(self):
         if request.is_json:
             # convert to json
-            data = request.get_json(force=True)
-            song_id = data['album_id']
+            data = request.get_json(force=True)["data"]
+            album_id = data['album_id']
             with self.connections.cursor() as cursor:
                 sql_delete = "DELETE FROM tbl_album WHERE album_id=%s"
                 # Execute the query
-                cursor.execute(sql_delete, song_id)
+                cursor.execute(sql_delete, album_id)
                 # the connection is not autocommit by default. So we must commit to save our changes.
                 self.connections.commit()
             return {"status": "success"}, 200
         else:
-            return {"status": "error"}
+            return {"status": "error"}, 404
 
     def put(self):
         if request.is_json:
