@@ -6,39 +6,40 @@
     bottom: 0;
     left: 0;
     overflow: hidden;
-    background: #46595C
 }
 
 .main-sidebar{
-    width: var(--sidebar-width);
-    background-color: var(--sidebar-bg);
+    width: 240px;
+    background-color: rgba(255, 255, 255, 0.05);
     position: fixed;
     top: 0;
-    bottom: calc(var(--music-control-height) + 54px);
+    bottom: 144px;
     left: 0;
 }
 
 .sidebar-item{
-    color: var(--white-color);
     opacity: 0.8;
     height: 38px;
     font-size: 1.3rem;
-    font-weight: 500;
+    font-weight: 500px;
     display: flex;
     align-items: center;
-    padding-left: var(--side-padding);
+    padding-left: 28px;
     cursor: pointer;
 }
 
-.logo{
+
+/*.logo{
     width: 240px;
-    height: 70px;
-    background-image: url(https://cdn3.vectorstock.com/i/1000x1000/06/52/music-player-icon-for-logos-websites-and-apps-vector-30290652.jpg);
-    background-size: 30%;
+    height: 80px;
+    background-image: url(https://cdn3.vectorstock.com/i/1000x1000/06/52/music-player-icon-for-logos-websites-and-apps-vector-30290652.jpg); 
+    background-size: 40%;
     background-repeat: no-repeat;
     background-position-x: 1px;
-    background-position-y: 50%;
-}
+    background-position-y: 49%;
+    opacity: 0.9;
+
+} */
 
 .personal{
     margin-bottom: 15px;
@@ -67,7 +68,6 @@
 
 .sidebar-item.sidebar-item__active{
     background-color: var(--active-color);
-    border-left: 3px solid #ED2B91;
     padding-left: calc(var(--side-padding) - 3px);
 }
 
@@ -89,13 +89,40 @@
 .container{
     position: absolute;
     top: 0;
-    left: var(--sidebar-width);
-    right: var(--next-song-width);
-    height: calc(100vh - var(--music-control-height));
+    left: 240px;
+    right: 329px;
+    height: calc(100vh - 90px);
     overflow-y: auto;
 }
 
+.header-wrapper {
+    position: fixed;
+    top: 0;
+    left: 240px;
+    right: 329px;
+    z-index: 10;
+}
+
+.header {
+    position: relative;
+    height: 70px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+}
+
+
 .header__width-search-input{
+    display: flex;
+    align-items: center;
+    position: fixed;
+    left: 240px;
+    top: 0;
+    height: 30px;
+    z-index: 99;
+    min-width: 660px;
+    transition: right .4s;
     font-size: 1.4rem;
     font-weight: 200;
     background-color: transparent;
@@ -103,8 +130,19 @@
     width: 90%;
     padding: 8px 0;
     outline: none;
-    color: var(--white-color);
     opacity: 0.9;
     padding-left: 10px;
     z-index: 1;
+}
+
+.profile-name{
+    align-items: center;
+    display: flex;
+    position: fixed;
+    left: 580px;
+    height: 200px;
+    top: 0;
+    z-index: 99;
+    min-width: 660px;
+
 }
