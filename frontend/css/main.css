@@ -146,3 +146,29 @@
     min-width: 660px;
 
 }
+
+.header__width-search-sub-header {
+    color: var(--white-color);
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-top: 20px;
+    display: block;
+}
+
+.header__width-search-sub-list{
+    padding-left: 0;
+    list-style: none;
+}
+
+.header__width-search-sub-item-link{
+    display: flex;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+
