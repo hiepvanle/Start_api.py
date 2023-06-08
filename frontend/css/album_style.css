@@ -25,7 +25,7 @@ td{
     font-size: larger;
     line-height: 3;
     position: relative;
-    left: 82px;
+    left: 400px;
 }
 .job_input{
     font-size: 80%;
@@ -34,7 +34,6 @@ td{
 }
 .add_button{
     font-size: larger;
-    width: 50px;
     position: relative;
     left: 550px;
     right: 2px;

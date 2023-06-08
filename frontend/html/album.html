@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="C:\Users\ACER\OneDrive\Máy tính\MyMusic\MyMusic-1\frontend\css\main.css" />
+  <link rel="stylesheet" href="C:\Users\ACER\OneDrive\Máy tính\MyMusic\MyMusic-1\frontend\css\album_style.css" />
   <title>Album</title>
 </head>
 <body>
@@ -17,9 +17,9 @@
 
           <!-- this is the search form -->
     <form class="job_form_find">
-      <a style="font-size: larger;"> Search: </a><input class="song_input" size="40%" type="text" id="searchid" placeholder="Song ID..">
+      <a style="font-size: larger;"> Search: </a><input class="song_input" size="40%" type="text" id="searchid" placeholder="Album ID..">
     <!-- this is button to Find -->
-      <button type="button" onclick="searchSong()" style="font-size: 100%;">Find</button>
+      <button type="button" onclick="searchSong()" style="font-size: 100%;">Find</button> 
     
     </form>
 
@@ -27,7 +27,7 @@
     <table class="song_table" id="song-table" style="display: none;">
       <thead>
         <tr>
-          <th class="song_id">Song ID</th>
+          <th class="song_id">Album ID</th>
           <th class="song_name">Name</th>
           <th class="type_id">Type ID</th>
           <th class="song_writer_id">Song Writer ID</th>
@@ -39,13 +39,13 @@
       </thead>
       <tbody id="song-list"></tbody>
       <!-- this is the button to SHOW FORM for add job -->
-      <button class="add_button" id="show-form-to-add-song">Add</button>
+      <button class="add_button" id="show-form-to-add-song">Add Album</button>
     </table>
 
           <!-- This is the form -->
     <form class="song_form_add" id="form-to-add" style="display: none;">
       <!-- form -->
-      <label for="song_id">Song Id</label>
+      <label for="song_id">Album Id</label>
       <input type="int" id="song_id" name="Song ID" required>
 
       <label for="song_name">Name:</label>
