@@ -9,38 +9,76 @@ class Singer(Resource):
         self.connections = kwargs['connections']
 
     def get(self):
-        if 'singer_id' != "":
-            cur = self.connections.cursor()
-            drive = []
-            sql = "SELECT * FROM tbl_singer"
-            cur.execute(sql)
-            result = cur.fetchall()
-            for i in result:
-                data = {
-                    'singer_id': i[0],
-                    'singer_name': i[1],
-                    'singer_description': i[2],
-                    'hometown': i[3],
-                    'date_of_birth': i[4],
-                }
-                drive.append(data)
-            return jsonify(result)
+        if request.query_string is not None or request.query_string != "":
+            with self.connections.cursor() as cursor:
+                # get all
+                if request.args['sid'] == "*":
+                    drive = []
+                    sql = "SELECT * FROM `tbl_singer`"
+                    cursor.execute(sql)
+                    result = cursor.fetchall()
+                    for i in result:
+                        data = {
+                            'singer_id': i[0],
+                            'singer_name': i[1],
+                            'singer_description': i[2],
+                            'hometown': i[3],
+                            'date_of_birth': i[4].strftime('%Y-%m-%d %H:%M:%S'),  # Convert datetime to string
+                        }
+                        drive.append(data)
+                    return drive, 200
+                # get by id
+                else:
+                    sql = "SELECT * FROM `tbl_singer` WHERE `singer_id`=%s"
+                    cursor.execute(sql, (request.args['sid'],))
+                    result = cursor.fetchone()
+                    if result is not None:
+                        data = {
+                            'singer_id': result[0],
+                            'singer_name': result[1],
+                            'singer_description': result[2],
+                            'hometown': result[3],
+                            'date_of_birth': result[4].strftime('%Y-%m-%d %H:%M:%S'),  # Convert datetime to string
+                        }
+                        return data, 200
+                    else:
+                        return {"status": "not found"}, 404
         else:
-            cur = self.connections.cursor()
-            sql = "SELECT * FROM tbl_singer WHERE singer_id=%s"
-            drive = []
-            cur.execute(sql, ('singer_id',))
-            result = cur.fetchone()
-            for i in result:
-                data = {
-                    'singer_id': i[0],
-                    'singer_name': i[1],
-                    'singer_description': i[2],
-                    'hometown': i[3],
-                    'date_of_birth': i[4],
-                }
-                drive.append(data)
-            return jsonify(result)
+            return {"status": "error"}, 400
+
+    # def get(self):
+    #     if 'singer_id' != "":
+    #         cur = self.connections.cursor()
+    #         drive = []
+    #         sql = "SELECT * FROM tbl_singer"
+    #         cur.execute(sql)
+    #         result = cur.fetchall()
+    #         for i in result:
+    #             data = {
+    #                 'singer_id': i[0],
+    #                 'singer_name': i[1],
+    #                 'singer_description': i[2],
+    #                 'hometown': i[3],
+    #                 'date_of_birth': i[4],
+    #             }
+    #             drive.append(data)
+    #         return jsonify(result)
+    #     else:
+    #         cur = self.connections.cursor()
+    #         sql = "SELECT * FROM tbl_singer WHERE singer_id=%s"
+    #         drive = []
+    #         cur.execute(sql, ('singer_id',))
+    #         result = cur.fetchone()
+    #         for i in result:
+    #             data = {
+    #                 'singer_id': i[0],
+    #                 'singer_name': i[1],
+    #                 'singer_description': i[2],
+    #                 'hometown': i[3],
+    #                 'date_of_birth': i[4],
+    #             }
+    #             drive.append(data)
+    #         return jsonify(result)
 
     def post(self):
         if request.is_json:
