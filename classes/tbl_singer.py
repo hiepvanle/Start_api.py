@@ -100,7 +100,7 @@ class Singer(Resource):
     def delete(self):
         if request.is_json:
             # convert to json
-            data = request.get_json(force=True)
+            data = request.get_json(force=True)["data"]
             song_id = data['singer_id']
             with self.connections.cursor() as cursor:
                 sql_delete = "DELETE FROM tbl_singer WHERE singer_id=%s"
@@ -111,6 +111,7 @@ class Singer(Resource):
             return {"status": "success"}, 200
         else:
             return {"status": "error"}, 404
+
 
     def put(self):
         if request.is_json:
