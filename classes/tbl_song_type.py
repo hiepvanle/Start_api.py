@@ -9,34 +9,72 @@ class Song_type(Resource):
         self.connections = kwargs['connections']
 
     def get(self):
-        if 'type_id' != "":
-            cur = self.connections.cursor()
-            drive = []
-            sql = "SELECT * FROM tbl_song_type"
-            cur.execute(sql)
-            result = cur.fetchall()
-            for i in result:
-                data = {
-                    'type_id': i[0],
-                    'type_name': i[1],
-                    'type_description': i[3],
-                }
-                drive.append(data)
-            return jsonify(result)
+        if request.query_string is not None or request.query_string != "":
+            with self.connections.cursor() as cursor:
+                # get all
+                if request.args['stid'] == "*":
+                    drive = []
+                    sql = "SELECT * FROM `tbl_song_type`"
+                    cursor.execute(sql)
+                    result = cursor.fetchall()
+                    for i in result:
+                        data = {
+                            'type_id': i[0],
+                            'type_name': i[1],
+                            'type_description': i[2],
+
+                        }
+                        drive.append(data)
+                    return drive, 200
+                # get by id
+                else:
+                    sql = "SELECT * FROM `tbl_song_type` WHERE `type_id`=%s"
+                    cursor.execute(sql, (request.args['stid'],))
+                    result = cursor.fetchone()
+                    if result is not None:
+                        data = {
+                            'type_id': result[0],
+                            'type_name': result[1],
+                            'type_description': result[2],
+
+                        }
+                        return data, 200
+                    else:
+                        return {"status": "not found"}, 404
         else:
-            cur = self.connections.cursor()
-            sql = "SELECT * FROM tbl_song_type WHERE type_id=%s"
-            drive = []
-            cur.execute(sql, ('type_id',))
-            result = cur.fetchone()
-            for i in result:
-                data = {
-                    'type_id': i[0],
-                    'type_name': i[1],
-                    'type_description': i[3],
-                }
-                drive.append(data)
-            return jsonify(result)
+            return {"status": "error"}, 400
+
+
+
+    # def get(self):
+    #     if 'type_id' != "":
+    #         cur = self.connections.cursor()
+    #         drive = []
+    #         sql = "SELECT * FROM tbl_song_type"
+    #         cur.execute(sql)
+    #         result = cur.fetchall()
+    #         for i in result:
+    # #             data = {
+    #                 'type_id': i[0],
+    #                 'type_name': i[1],
+    #                 'type_description': i[3],
+    # #             }
+    #             drive.append(data)
+    #         return jsonify(result)
+    #     else:
+    #         cur = self.connections.cursor()
+    #         sql = "SELECT * FROM tbl_song_type WHERE type_id=%s"
+    #         drive = []
+    #         cur.execute(sql, ('type_id',))
+    #         result = cur.fetchone()
+    #         for i in result:
+    #             data = {
+    #                 'type_id': i[0],
+    #                 'type_name': i[1],
+    #                 'type_description': i[3],
+    #             }
+    #             drive.append(data)
+    #         return jsonify(result)
 
     def post(self):
         if request.is_json:
@@ -56,7 +94,7 @@ class Song_type(Resource):
     def delete(self):
         if request.is_json:
             # convert to json
-            data = request.get_json(force=True)
+            data = request.get_json(force=True)['data']
             type_id = data['type_id']
             with self.connections.cursor() as cursor:
                 sql_delete = "DELETE FROM tbl_song_type WHERE type_id=%s"
