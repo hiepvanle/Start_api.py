@@ -13,7 +13,7 @@ td{
     font-size: 300%;
     color: blue;
 }
-.job_table{
+.song_table{
     text-align: center;
     justify-content: center;
     position: relative;
@@ -44,7 +44,7 @@ td{
     top: 30px;
     padding: 10px 30px;
 }
-.job_id{
+.song_id{
     color: #838B8B;
     padding: 10px 20px;
 }
