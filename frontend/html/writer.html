@@ -1,54 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Position</title>
-  <link rel="stylesheet" href="C:\Users\ACER\OneDrive\Máy tính\MyMusic\MyMusic-1\frontend\css\main.css" />
-</head>
-<body>
-  <button type="button">
-    <a href="C:\Users\ACER\OneDrive\Máy tính\MyMusic\MyMusic-1\frontend\html\index.html">Home</a>
-  </button>
+<html>
+    <head>
+        <link rel="stylesheet" href="C:\Users\ACER\OneDrive\Máy tính\MyMusic\MyMusic-1\frontend\css\writer.css" />
+        <title>test</title>
+        <meta charset="UTF-8" />
+        <meta name="keywords" content="Frontend" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <body>
+        <section class="container" >
+            <div class="content">
+                <div class="header">
+                    <h1>writer Data</h1>
+                    <p>Search writerId</p>
+                    <input id="search" type="search" placeholder="searchID...." />
+                </div>
+            </div>
+            <div id="list" class="list">
+            </div>
 
-  <h1>Writer Data</h1>
-
-  <!-- Search form -->
-  <form>
-    Search: <input type="text" id="searchid" placeholder="Writer ID..">
-    <button type="button" onclick="searchPosition()">Find</button>
-  </form>
-
-  <!-- Position table -->
-  <table id="position-table" style="display: none;">
-    <thead>
-      <tr>
-        <th>Employee ID</th>
-        <th>Job ID</th>
-        <th>From Date</th>
-        <th>Option</th>
-      </tr>
-    </thead>
-    <tbody id="position-list"></tbody>
-    <button id="show-form-to-add-position">Add</button>
-  </table>
-
-  <!-- Form to add position -->
-  <form id="form-to-add" style="display: none;">
-    <label for="eid">Employee ID:</label>
-    <input type="text" id="eid" name="eid" required>
-    <label for="jid">Job ID:</label>
-    <input type="text" id="jid" name="jid" required>
-    <label for="from_date">From Date:</label>
-    <input type="date" id="from_date" name="fromdate" required>
-    <button type="submit">Submit</button>
-  </form>
-
-  <!-- Success message elements -->
-  <div id="success-message" style="display:none">Data posted successfully!</div>
-  <div id="delete-success-message" style="display:none">Data deleted successfully!</div>
-  <div id="error-message" style="display: none; color: red;"></div>
-  <script src="javascript_code/position.js"></script>
-</body>
+        </section>
+        <script src="C:\Users\ACER\OneDrive\Máy tính\MyMusic\MyMusic-1\frontend\javascript_code\writer.js"></script>
+    </body>
 </html>

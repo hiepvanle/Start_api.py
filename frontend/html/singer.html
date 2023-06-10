@@ -1,56 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="C:\Users\ACER\OneDrive\Máy tính\MyMusic\MyMusic-1\frontend\css\main.css" />
-  <title>Singer</title>
+<html>
+    <head>
+        <link rel="stylesheet" href="C:\Users\ACER\OneDrive\Máy tính\MyMusic\MyMusic-1\frontend\css\singer.css" />
+        <title>test</title>
+        <meta charset="UTF-8" />
+        <meta name="keywords" content="Frontend" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <body>
+        <section class="container" >
+            <div class="content">
+                <div class="header">
+                    <h1>Singer Data</h1>
+                    <p>Search Singerid</p>
+                    <input id="search" type="search" placeholder="searchID...." />
+                </div>
+            </div>
+            <div id="list" class="list">
+            </div>
 
-</head>
-<body>
-  <button type="button">
-    <a href="C:\Users\ACER\OneDrive\Máy tính\MyMusic\MyMusic-1\frontend\html\index.html">Home</a>
-  </button>
-
-  <h1>Singer Data</h1>
-
-  <!-- Search form -->
-  <form>
-    Search: <input type="text" id="searchid" placeholder="Singer ID..">
-    <button type="button" onclick="searchHoliday()">Find</button>
-  </form>
-
-<!-- Holiday table -->
-<table id="holiday-table" style="display: none;">
-    <thead>
-      <tr>
-        <th>Job ID</th>
-        <th>Month</th>
-        <th>Date</th>
-        <th>Option</th>
-      </tr>
-    </thead>
-    <tbody id="holiday-list"></tbody>
-    <button id="show-form-to-add-holiday">Add</button>
-  </table>
-
- <!-- Form to add holiday -->
- <form id="form-to-add" style="display: none;">
-    <label for="jid">Job ID:</label>
-    <input type="text" id="jid" name="id" required>
-    <label for="holiday_month">Month:</label>
-    <input type="number" id="holiday_month" name="holiday_month" required>
-    <label for="holiday_date">Date:</label>
-    <input type="number" id="holiday_date" name="holiday_date" required>
-    <button type="submit">Submit</button>
-  </form>
-
-  <div id="success-message" style="display: none;">Data posted successfully!</div>
-  <div id="delete-success-message" style="display: none;">Deleted successfully!</div>
-  <div id="error-message" style="display: none; color: red;"></div>
-
-
-  <script src="javascript_code/holiday.js"></script>
-</body>
+        </section>
+        <script src="C:\Users\ACER\OneDrive\Máy tính\MyMusic\MyMusic-1\frontend\javascript_code\singer.js"></script>
+    </body>
 </html>
