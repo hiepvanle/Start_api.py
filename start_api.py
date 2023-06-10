@@ -9,11 +9,12 @@ from classes.tbl_writer import Writer
 from classes.tbl_begin import Begin
 import pymysql
 from classes.utils import read_config
-# from flask_cors import CORS
+from flask_cors import CORS
+from utils import *
 
 
 app = Flask(__name__)
-# CORS(app)
+cors = CORS(app)
 api = Api(app)
 
 conf = read_config()
