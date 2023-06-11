@@ -3,13 +3,12 @@ const list = document.getElementById('list');
 const search = document.getElementById('search');
 const listItem = [];
 
-search.addEventListener('input', (e) => filterInput(e.target.value))
-
 fetchAlbums();
 
 async function fetchAlbums() {
-    const response = await fetch('http://127.0.0.1:5000/song?sid=*');
+    const response = await fetch('http://127.0.0.1:5000/song?songid=*');
     const data = await response.json();
+    console.log(':>>> data,', data)
     list.innerHTML = 'Loading....';
     setTimeout(() => {
         list.innerHTML = '';
@@ -27,15 +26,3 @@ async function fetchAlbums() {
     }, 2000);
 }
 
-function filterInput(keySearch) {
-    const searchTerm = keySearch.toLowerCase();
-    console.log(':>>>> searchTerm', searchTerm);
-    listItems.forEach((item) => {
-        if(item.innerText.toLowerCase().includes(searchTerm)) {
-            item.classList.remove('hidden');
-        } 
-        else {
-            item.classList.add('hidden');
-        }
-    })
-  }

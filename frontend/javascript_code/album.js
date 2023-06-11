@@ -15,11 +15,13 @@ async function fetchAlbums() {
         list.innerHTML = '';
         data.forEach(data => {
             const divItem = document.createElement('div');
-            listItems.push(divItem);
             divItem.innerHTML = `
                 <div class="detail">
                     <h2>${data.album_id}</h2>
-                    <p>${data.album_name} .${data.album_description} .${data.album_date}</p>
+                    <p>Name: ${data.album_name} <br/>
+                    Description: ${data.album_description} <br/>
+                    Date: ${data.album_date}
+                    </p>
                 </div>
             `;
             list.appendChild(divItem);
@@ -27,17 +29,6 @@ async function fetchAlbums() {
     }, 2000);
 }
 
-function filterInput(keySearch) {
-    const searchTerm = keySearch.toLowerCase();
-    console.log(':>>>> searchTerm', searchTerm);
-    listItems.forEach((item) => {
-        if(item.innerText.toLowerCase().includes(searchTerm)) {
-            item.classList.remove('hidden');
-        } 
-        else {
-            item.classList.add('hidden');
-        }
-    })
-  }
+
 
  
