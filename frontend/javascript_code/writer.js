@@ -26,7 +26,7 @@ function createWriter (data, callback) {
         body: JSON.stringify(data)
     };
     
-    fetch(AlbumAPI, options)
+    fetch(writerAPI, options)
         .then(function(response) {
             response.json();
         })

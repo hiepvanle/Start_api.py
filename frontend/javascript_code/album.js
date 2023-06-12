@@ -21,7 +21,7 @@ function createAlbum (data, callback) {
     var options = {
         method: 'POST',
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/raw"
           },
         body: JSON.stringify(data)
     };
@@ -33,17 +33,38 @@ function createAlbum (data, callback) {
         .then(callback);
 }
 
+function deleteAlbum(album_id) {
+    var options = {
+        method: 'DELETE',
+        headers: {
+            "Content-Type": "application/raw"
+          },
+        body: JSON.stringify(data)
+    };
+    
+    fetch(AlbumAPI + '=' + album_id, options)
+        .then(function(response) {
+            response.json();
+        })
+        .then(function() {
+            var albumItem = document.querySelector('album-item-' + album_id);
+            if (albumItem) {
+                albumItem.remove();
+            }
+        });
+}
+
 
 function renderAlbum(albums) {
   var ListAlbumBlock = document.querySelector('#Album-list');
   var htmls = albums.map(function(album) {
     return `
-      <li>
+      <li class="album-item-${album.album_id}">
         <h4>${album.album_id}</h4>
         <h4>${album.album_name}</h4>
         <h4>${album.album_description}</h4>
         <h4>${album.album_date}</h4>
-        <button>Delete</button>
+        <button onclick="deleteAlbum(${album.album_id})">Delete</button>
       </li>
     `;
   });
