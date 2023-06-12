@@ -1,4 +1,4 @@
-var SingerAPI = 'http://127.0.0.1:5000/song?songid=*';
+var SongAPI = 'http://127.0.0.1:5000/song?songid=*';
 
 begin();
 
