@@ -22,7 +22,7 @@ let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
                 <td>${employee.album_description}</td>
 
                 <td>
-                  <button onclick="showEditForm('${employee.album_id}')">Edit</button>
+
                   <button data-eid="${employee.album_id}">Delete</button></td>
                 </td>
               `;
@@ -45,7 +45,7 @@ let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
               <td>${employee.date_release_album}</td>
               <td>${employee.album_description}</td>
               <td>
-                <button onclick="showEditForm('${employee.album_id}')">Edit</button>
+
                 <button onclick="deleteEmployee('${employee.album_id}')">Delete</button>
               </td>
             `;

@@ -29,7 +29,7 @@ class Album(Resource):
                 # get by id
                 else:
                     sql = "SELECT * FROM `tbl_album` WHERE `album_id`=%s"
-                    cursor.execute(sql, (request.args['wid']))
+                    cursor.execute(sql, (request.args['aid']))
                     result = cursor.fetchone()
                     data = {
                         'album_id': result[0],
