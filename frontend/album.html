@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/frontend/css_code/album_style.css" />
+  <title>Song Data</title>
+</head>
+<body>
+  <button type="button">
+    <a href="/frontend/main.html" id="logo">Album <br>WEBSITE </a>
+  </button>
+
+  <h1 class="employee_title">Album Data</h1>
+
+  <!-- Search form -->
+  <form class="employee_form_find">
+    <a style="font-size: larger;">Search:</a> <input class="employee_input" size="40%" type="text" id="searchid" placeholder="Album ID..">
+    <button  type="button" onclick="searchEmployee()" style="font-size: 100%;">Find</button>
+  </form>
+
+  <!-- Employee table -->
+  <table class="employee_table" id="employee-table" style="display: none;">
+    <thead>
+      <tr class="list_employee">
+        <th class="album_id">Album ID</th>
+        <th class="album_name">Album Name</th>
+        <th class="date_release_album">Date Release Album</th>
+        <th class="album_description">Album Description</th>
+
+        <th class="employee_option">Option</th>
+      </tr>
+    </thead>
+    <tbody id="employee-list"></tbody>
+    <button class="add_button" id="show-form-to-add-employee" style="font-size: 100%;">Add</button>
+  </table>
+
+  <!-- Form to add employee -->
+  <form class="employee_form_add" id="form-to-add" style="display: none;">
+
+    <label for="album_id">Album ID:</label>
+    <input type="text" id="album_id" name="album_id" required>
+
+    <label for="album_name">Album Name:</label>
+    <input type="text" id="album_name" name="album_name" required>
+
+    <label for="date_release_album">Date Release Album:</label>
+    <input type="text" id="date_release_album" name="date_release_album" required>
+
+    <label for="album_description">Album Description:</label>
+    <input type="text" id="album_description" name="album_description" required>
+
+    <button type="submit">Submit</button>
+    <button type="button" onclick="cancelForm()">Cancel</button>
+
+  </form>
+
+  <!-- Form to edit employee -->
+  <div class="employee_form_edit" id="edit-form-container" style="display: none;">
+    <form id="form_to_put">
+
+      <label for="albumput">Album Name:</label>
+      <input type="text" id="albumput" name="name" required>
+
+      <label for="releaseput">Listen Count:</label>
+      <input type="text" id="releaseput" name="release" required>
+
+      <label for="descriptionput">Rate:</label>
+      <input type="text" id="descriptionput" name="description" required>
+
+      <button type="submit">Submit</button>
+      <button type="button" onclick="cancelFormedit()">Cancel</button>
+
+    </form>
+  </div>
+
+
+  <!-- Success message elements -->
+  <div id="success-message" style="display:none">Data posted successfully!</div>
+  <div id="put-success-message" style="display:none">Data updated successfully!</div>
+  <div id="delete-success-message" style="display:none">Data deleted successfully!</div>
+  <div id="error-message" style="display: none; color: red;"></div>
+
+
+
+  <script src="javascript_code/album.js"> </script>
+</body>
+</html>

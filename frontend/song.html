@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/frontend/css_code/song_style.css" />
+  <title>Song Data</title>
+</head>
+<body>
+  <button type="button">
+    <a href="/frontend/main.html" id="logo">Song <br>WEBSITE </a>
+  </button>
+
+  <h1 class="employee_title">Song Data</h1>
+
+  <!-- Search form -->
+  <form class="employee_form_find">
+    <a style="font-size: larger;">Search:</a> <input class="employee_input" size="40%" type="text" id="searchid" placeholder="Employee ID..">
+    <button  type="button" onclick="searchEmployee()" style="font-size: 100%;">Find</button>
+  </form>
+
+  <!-- Employee table -->
+  <table class="employee_table" id="employee-table" style="display: none;">
+    <thead>
+      <tr class="list_employee">
+        <th class="song_id">Song ID</th>
+        <th class="song_name">Song Name</th>
+        <th class="listen_count">Listen Count</th>
+        <th class="rate">Rate</th>
+
+        <th class="employee_option">Option</th>
+      </tr>
+    </thead>
+    <tbody id="employee-list"></tbody>
+    <button class="add_button" id="show-form-to-add-employee" style="font-size: 100%;">Add</button>
+  </table>
+
+  <!-- Form to add employee -->
+  <form class="employee_form_add" id="form-to-add" style="display: none;">
+
+    <label for="song_id">Song ID:</label>
+    <input type="text" id="song_id" name="song_id" required>
+
+    <label for="song_name">Song Name:</label>
+    <input type="text" id="song_name" name="song_name" required>
+
+    <label for="listen_count">Listen Count:</label>
+    <input type="text" id="listen_count" name="listen_count" required>
+
+    <label for="rate">Rate:</label>
+    <input type="text" id="rate" name="rate" required>
+
+    <button type="submit">Submit</button>
+    <button type="button" onclick="cancelForm()">Cancel</button>
+
+  </form>
+
+  <!-- Form to edit employee -->
+  <div class="employee_form_edit" id="edit-form-container" style="display: none;">
+    <form id="form_to_put">
+
+      <label for="nameput">Song Name:</label>
+      <input type="text" id="nameput" name="name" required>
+
+      <label for="listenput">Listen Count:</label>
+      <input type="text" id="listenput" name="listen" required>
+
+      <label for="rateput">Rate:</label>
+      <input type="text" id="rateput" name="rate" required>
+
+      <button type="submit">Submit</button>
+      <button type="button" onclick="cancelFormedit()">Cancel</button>
+
+    </form>
+  </div>
+
+
+  <!-- Success message elements -->
+  <div id="success-message" style="display:none">Data posted successfully!</div>
+  <div id="put-success-message" style="display:none">Data updated successfully!</div>
+  <div id="delete-success-message" style="display:none">Data deleted successfully!</div>
+  <div id="error-message" style="display: none; color: red;"></div>
+
+
+
+  <script src="javascript_code/song.js"> </script>
+</body>
+</html>

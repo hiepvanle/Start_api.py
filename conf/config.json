@@ -8,13 +8,13 @@
       "password":"0397495785Ab@",
       "db":"mymucsic"
   },
-    "DATABASE_02": {
+    "DATABASE_00": {
       "host":"localhost",
       "user":"root",
       "password":"vydeptrai",
-      "db":"mymucsic"
+      "db":"mymusic"
   },
-    "DATABASE_00": {
+    "DATABASE_02": {
       "host":"localhost",
       "user":"root",
       "password":"Tykhung200300",
