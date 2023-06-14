@@ -24,6 +24,15 @@ class Song_writer(Resource):
                         drive.append(data)
                     return drive, 200
 
+    def delete(self):
+        return {"status":"method delete not supported"}
+
+    def post(self):
+        return {"status":"method post not supported"}
+
+    def put(self):
+        return {"status":"method put not supported"}
+
 # from flask import request, jsonify
 # from flask_restful import Resource
 #

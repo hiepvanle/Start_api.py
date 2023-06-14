@@ -6,7 +6,7 @@ let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
 
       if (search === '*') {
         // Fetch all employees from the API
-        fetch('http://127.0.0.1:5000/singer?singerid=*')
+        fetch('http://127.0.0.1:5000/singer?sgid=*')
           .then(response => response.json())
           .then(data => {
             employeetable.style.display = 'block';
@@ -32,7 +32,7 @@ let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
           });
       } else {
         // Fetch employee by ID from the API
-        fetch(`http://127.0.0.1:5000/singer?singerid=${search}`)
+        fetch(`http://127.0.0.1:5000/singer?sgid=${search}`)
           .then(response => response.json())
           .then(employee => {
             employeetable.style.display = 'block';
@@ -78,7 +78,7 @@ let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
       formToPut.setAttribute('data-employee-id', employeeId);
 
       // Fetch employee data by ID from the API
-      fetch(`http://127.0.0.1:5000/singer?singerid=${employeeId}`)
+      fetch(`http://127.0.0.1:5000/singer?sgid=${employeeId}`)
         .then(response => response.json())
         .then(employee => {
           namePut.value = employee.singer_name;
@@ -150,7 +150,7 @@ let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
         hometown: hometown
       };
 
-      fetch('http://127.0.0.1:5000/singer?singerid=*', {
+      fetch('http://127.0.0.1:5000/singer?sgid=*', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -200,9 +200,10 @@ let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
 
       const form = document.getElementById('form_to_put');
       const employeeId = form.getAttribute('data-employee-id');
-      const song_name = document.getElementById('nameput').value;
-      const listen_count = document.getElementById('listenput').value;
-      const rate = document.getElementById('rateput').value;
+      const singer_name = document.getElementById('nameput').value;
+      const singer_description = document.getElementById('descriptionput').value;
+      const day_of_birth = document.getElementById('birthdateput').value;
+      const hometown = document.getElementById('hometownput').value;
 
       const employeeData = {
         singer_id: employeeId,

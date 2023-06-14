@@ -40,9 +40,15 @@ class Song_type(Resource):
             return {"status": "error"}
 
 
+    def delete(self):
+        return {"status":"method delete not supported"}
 
 
+    def put(self):
+        return {"status":"method put not supported"}
 
+    def post(self):
+        return {"status":"method post not supported"}
 
 
 # from flask import request, jsonify

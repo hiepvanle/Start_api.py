@@ -74,7 +74,7 @@ class Album(Resource):
 
 
     def put(self):
-        return {"status":"method not supported"}
+        return {"status":"method put not supported"}
 
 
 

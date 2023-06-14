@@ -108,7 +108,7 @@ let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
         .catch(error => console.error(error));
       }
 
-      // Add an event listener to the employee list table
+      // Add an event listener to the writer list table
       const employeeList = document.getElementById('employee-list');
       employeeList.addEventListener('click', (event) => {
         const target = event.target;
@@ -162,7 +162,7 @@ let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
           setTimeout(()=>{
             // postFormContainer.style.display = 'none';
             postSuccessMessage.style.display = 'none';
-            // // Refresh the employee list
+            // // Refresh the writer list
             searchEmployee();
           },1000)
         })

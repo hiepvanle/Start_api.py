@@ -11,7 +11,7 @@ class Singer(Resource):
         if request.query_string is not None or request.query_string != "":
             with self.connections.cursor() as cursor:
                 # get all
-                if request.args['singerid'] == "*":
+                if request.args['sgid'] == "*":
                     drive = []
                     sql = "SELECT * FROM `tbl_singer`"
                     cursor.execute(sql)
@@ -30,7 +30,7 @@ class Singer(Resource):
                 # get by id
                 else:
                     sql = "SELECT * FROM `tbl_singer` WHERE `singer_id`=%s"
-                    cursor.execute(sql, (request.args['singerid']))
+                    cursor.execute(sql, (request.args['sgid']))
                     result = cursor.fetchone()
                     data = {
                         'singer_id': result[0],
