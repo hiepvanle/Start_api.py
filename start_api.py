@@ -7,16 +7,15 @@ from classes.tbl_album import Album
 from classes.tbl_singer import Singer
 from classes.tbl_writer import Writer
 from classes.tbl_begin import Begin
+
 import pymysql
-from classes.utils import read_config
 from flask_cors import CORS
 from utils import *
 
-
 app = Flask(__name__)
-cors = CORS(app)
-api = Api(app)
 
+api = Api(app)
+cors = CORS(app)
 conf = read_config()
 
 connections = pymysql.connect(host=conf['DATABASE_00']['host'], user=conf['DATABASE_00']['user'],
@@ -30,6 +29,7 @@ api.add_resource(Album, '/album', resource_class_kwargs={"connections": connecti
 api.add_resource(Singer, '/singer', resource_class_kwargs={"connections": connections})
 api.add_resource(Writer, '/writer', resource_class_kwargs={"connections": connections})
 api.add_resource(Begin, '/begin', resource_class_kwargs={"connections": connections})
+
 
 if __name__ == '__main__':
     app.run(debug=True)
