@@ -1,4 +1,4 @@
-/* employee_style.css */
+/* songtype_style.css */
 
 /* General Styles */
 body {
@@ -24,19 +24,19 @@ body {
   }
 
   /* Title Styles */
-  .employee_title {
+  .song_type_title {
     text-align: center;
     margin-top: 40px;
     margin-bottom: 20px;
   }
 
   /* Form Styles */
-  .employee_form_find {
+  .song_type_form_find {
     text-align: center;
     margin-bottom: 20px;
   }
 
-  .employee_input {
+  .song_type_input {
     padding: 5px;
     width: 60%;
     border: 1px solid #ccc;
@@ -56,32 +56,32 @@ body {
   }
 
   /* Table Styles */
-  .employee_table {
-    width: 34%;
+  .song_type_table {
+    width: 100%;
     table-layout: fixed;
     max-height: 390px; /* Adjust the desired height here */
     margin: 0 auto;
-    border-collapse: collapse;
-    background-color: #fff;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-collapse: separate;
+    /* background-color: #fff; */
+    /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); */
     overflow-y: scroll;
   }
 
-  .employee_table th,
-  .employee_table td {
+  .song_type_table th,
+  .song_type_table td {
     padding: 10px;
-    text-align: left;
+    text-align: center;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  .list_employee {
-    background-color: #f2f2f2;
+  .list_song_type {
+    /* background-color: #f2f2f2; */
     font-weight: bold;
   }
 
-  .employee_option {
+  .song_type_option {
     text-align: center;
   }
 
@@ -97,8 +97,8 @@ body {
     cursor: pointer;
   }
 
-  /* Form to Add Employee */
-  .employee_form_add {
+  /* Form to Add Songtype */
+  .song_type_form_add {
     display: none;
     margin-top: 20px;
   }
@@ -119,16 +119,16 @@ body {
       background-color: #0d8bf5;
     }
 
-  .employee_form_add label,
-  .employee_form_edit label {
+  .song_type_form_add label,
+  .song_type_form_edit label {
     display: block;
     margin-top: 10px;
   }
 
-  .employee_form_add input[type="text"],
-  .employee_form_add input[type="email"],
-  .employee_form_edit input[type="text"],
-  .employee_form_edit input[type="email"] {
+  .song_type_form_add input[type="text"],
+  .song_type_form_add input[type="email"],
+  .song_type_form_edit input[type="text"],
+  .song_type_form_edit input[type="email"] {
     width: 99%;
     padding: 5px;
     margin-top: 5px;
@@ -137,10 +137,10 @@ body {
     outline: none;
   }
 
-  .employee_form_add button[type="submit"],
-  .employee_form_edit button[type="submit"],
-  .employee_form_add button[type="button"],
-  .employee_form_edit button[type="button"] {
+  .song_type_form_add button[type="submit"],
+  .song_type_form_edit button[type="submit"],
+  .song_type_form_add button[type="button"],
+  .song_type_form_edit button[type="button"] {
     display: inline-block;
     margin-top: 10px;
     padding: 10px 20px;

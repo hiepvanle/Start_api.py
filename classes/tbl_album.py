@@ -60,21 +60,33 @@ class Album(Resource):
     def delete(self):
         if request.is_json:
             data = request.get_json()
-            writer_id = data.get('album_id')
-            if writer_id is not None:
+            Album_id = data.get('album_id')
+            if Album_id is not None:
                 with self.connections.cursor() as cursor:
                     sql_delete = "DELETE FROM `tbl_album` WHERE `album_id`=%s"
-                    cursor.execute(sql_delete, writer_id)
+                    cursor.execute(sql_delete, Album_id)
                     self.connections.commit()
                 return {"status": "success"}, 200
             else:
-                return {"error": "eid is required"}, 400
+                return {"error": "aid is required"}, 400
         else:
             return {"error": "invalid request body"}, 400
 
 
     def put(self):
-        return {"status":"method put not supported"}
+        # return {"status":"method put not supported"}
+        if request.is_json:
+            # convert to json
+            data = request.get_json(force=True)
+            sql_put = "UPDATE tbl_album SET `album_name`=%(album_name)s," \
+                      "`date_release_album`=%(date_release_album)s,`album_description`=%(album_description)s WHERE " \
+                      "`album_id`=%(album_id)s; "
+            with self.connections.cursor() as cursor:
+                cursor.execute(sql_put, data)
+                self.connections.commit()
+            return {'status': 'success'}, 200
+        else:
+            return {"status": "error"}
 
 
 

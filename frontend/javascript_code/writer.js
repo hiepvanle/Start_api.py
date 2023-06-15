@@ -1,58 +1,58 @@
-let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
+let rememberedWriterId = ""; // Variable to store the remembered writer ID
 
-    function searchEmployee() {
+    function searchWriter() {
       const search = document.getElementById('searchid').value;
-      const employeetable = document.getElementById('employee-table');
+      const writertable = document.getElementById('writer-table');
 
       if (search === '*') {
-        // Fetch all employees from the API
+        // Fetch all writers from the API
         fetch('http://127.0.0.1:5000/writer?wid=*')
           .then(response => response.json())
           .then(data => {
-            employeetable.style.display = 'block';
-            const employeeList = document.getElementById('employee-list');
-            employeeList.innerHTML = ''; // Clear all data table before adding new data
+            writertable.style.display = 'block';
+            const writerList = document.getElementById('writer-list');
+            writerList.innerHTML = ''; // Clear all data table before adding new data
 
-            data.forEach(employee => {
+            data.forEach(writer => {
               const tr = document.createElement('tr');
               tr.innerHTML = `
-                <td>${employee.writer_id}</td>
-                <td>${employee.writer_name}</td>
-                <td>${employee.writer_description}</td>
+                <td>${writer.writer_id}</td>
+                <td>${writer.writer_name}</td>
+                <td>${writer.writer_description}</td>
                 <td>
 
                 <td>
-                  <button onclick="showEditForm('${employee.writer_id}')">Edit</button>
-                  <button data-eid="${employee.writer_id}">Delete</button></td>
+                  <button onclick="showEditForm('${writer.writer_id}')">Edit</button>
+                  <button data-wid="${writer.writer_id}">Delete</button></td>
                 </td>
               `;
-              employeeList.appendChild(tr);
+              writerList.appendChild(tr);
             });
           });
       } else {
-        // Fetch employee by ID from the API
+        // Fetch writer by ID from the API
         fetch(`http://127.0.0.1:5000/writer?wid=${search}`)
           .then(response => response.json())
-          .then(employee => {
-            employeetable.style.display = 'block';
-            const employeeList = document.getElementById('employee-list');
-            employeeList.innerHTML = ''; // Clear all data table before adding new data
+          .then(writer => {
+            writertable.style.display = 'block';
+            const writerList = document.getElementById('writer-list');
+            writerList.innerHTML = ''; // Clear all data table before adding new data
 
             const tr = document.createElement('tr');
             tr.innerHTML = `
-              <td>${employee.writer_id}</td>
-              <td>${employee.writer_name}</td>
-              <td>${employee.writer_description}</td>
+              <td>${writer.writer_id}</td>
+              <td>${writer.writer_name}</td>
+              <td>${writer.writer_description}</td>
 
               <td>
-                <button onclick="showEditForm('${employee.writer_id}')">Edit</button>
-                <button onclick="deleteEmployee('${employee.writer_id}')">Delete</button>
+                <button onclick="showEditForm('${writer.writer_id}')">Edit</button>
+                <button onclick="deleteWriter('${writer.writer_id}')">Delete</button>
               </td>
             `;
-            employeeList.appendChild(tr);
+            writerList.appendChild(tr);
           })
           .catch(error => {
-            employeetable.style.display = 'none';
+            writertable.style.display = 'none';
             console.log('Song not found:', error);
           });
       }
@@ -63,7 +63,7 @@ let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
       addForm.style.display = 'block';
     }
 
-    function showEditForm(employeeId) {
+    function showEditForm(writerId) {
       const editFormContainer = document.getElementById('edit-form-container');
       const formToPut = document.getElementById('form_to_put');
 
@@ -71,26 +71,25 @@ let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
       const descriptionPut = document.getElementById('descriptionput');
 
 
-      // Set the employee ID in the edit form
-      formToPut.setAttribute('data-employee-id', employeeId);
+      // Set the Writer ID in the edit form
+      formToPut.setAttribute('data-writer-id', writerId);
 
-      // Fetch employee data by ID from the API
-      fetch(`http://127.0.0.1:5000/writer?wid=${employeeId}`)
+      // Fetch Writer data by ID from the API
+      fetch(`http://127.0.0.1:5000/writer?wid=${writerId}`)
         .then(response => response.json())
-        .then(employee => {
-          namePut.value = employee.song_name;
-          listenPut.value = employee.listen_count;
-          ratePut.value = employee.rate;
+        .then(writer => {
+          namePut.value = writer.writer_name;
+          descriptionPut.value = writer.writer_description
           editFormContainer.style.display = 'block';
         });
 
-      // Store the employeeId in the rememberedEmployeeId variable
-      rememberedEmployeeId = employeeId;
+      // Store the writerId in the rememberedWriterId variable
+      rememberedWriterId = writerId;
     }
 
          // Delete data
-         function deleteEmployee(writer_id) {
-        // Send a DELETE request to the API with the eid value
+         function deleteWriter(writer_id) {
+        // Send a DELETE request to the API with the wid value
         fetch(`http://127.0.0.1:5000/writer`, {
           method: 'DELETE',
           headers: {
@@ -100,7 +99,7 @@ let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
         })
         .then(response => {
           // If the request is successful, remove the corresponding table row
-          const row = document.querySelector(`#employee-list tr[data-eid="${writer_id}"]`);
+          const row = document.querySelector(`#writer-list tr[data-wid="${writer_id}"]`);
           row.parentNode.removeChild(row);
           const successMessage = document.getElementById('delete-success-message');
           successMessage.style.display = 'block';
@@ -109,20 +108,20 @@ let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
       }
 
       // Add an event listener to the writer list table
-      const employeeList = document.getElementById('employee-list');
-      employeeList.addEventListener('click', (event) => {
+      const writerList = document.getElementById('writer-list');
+      writerList.addEventListener('click', (event) => {
         const target = event.target;
         // Check if the clicked element is a delete button
         if (target.tagName === 'BUTTON' && target.textContent === 'Delete') {
-          const writer_id = target.getAttribute('data-eid');
-          deleteEmployee(writer_id);
+          const writer_id = target.getAttribute('data-wid');
+          deleteWriter(writer_id);
           const successMessage = document.getElementById('delete-success-message');
           successMessage.style.display = 'block';
-          const employeetable = document.getElementById('employee-table');
-          employeetable.style.display = 'none';
+          const writertable = document.getElementById('writer-table');
+          writertable.style.display = 'none';
           setTimeout(() => {
             successMessage.style.display = 'none';
-            searchEmployee();
+            searchWriter();
           }, 2000);
         }
       });
@@ -135,7 +134,7 @@ let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
       const writer_description = document.getElementById('writer_description').value;
 
 
-      const employeeData = {
+      const writerData = {
         writer_id: writer_id,
         writer_name: writer_name,
         writer_description: writer_description
@@ -147,15 +146,15 @@ let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(employeeData)
+        body: JSON.stringify(writerData)
       })
         .then(response => response.json())
         .then(data => {
           const postFormContainer = document.getElementById('form-to-add');
-          const employeetable = document.getElementById('employee-table');
+          const writertable = document.getElementById('writer-table');
           const postSuccessMessage = document.getElementById('success-message');
           postSuccessMessage.style.display = 'block';
-          employeetable.style.display = 'none';
+          writertable.style.display = 'none';
           postFormContainer.style.display = 'none';
           form.reset();
           console.log('Data Posted successfully:', data);
@@ -163,22 +162,22 @@ let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
             // postFormContainer.style.display = 'none';
             postSuccessMessage.style.display = 'none';
             // // Refresh the writer list
-            searchEmployee();
+            searchWriter();
           },1000)
         })
         .catch(error => {console.error('Error posting data:', error);
                     const postFormContainer = document.getElementById('form-to-add');
                     // Display the error message to the user
                     const errorMessage = document.getElementById('error-message');
-                    errorMessage.textContent = 'Failed to POST Add exist Employee ID and Job ID, Please!!! ' +'(The main error: ' + error.message +')' ;
+                    errorMessage.textContent = 'Failed to POST Add exist writer ID, Please!!! ' +'(The main error: ' + error.message +')' ;
                     errorMessage.style.display = 'block';
                     postFormContainer.style.display = 'none';
-                    const employeetable = document.getElementById('employee-table');
-                    employeetable.style.display = 'none';
+                    const writertable = document.getElementById('writer-table');
+                    writertable.style.display = 'none';
                     setTimeout(()=>{
                         postFormContainer.style.display = 'block';
                         errorMessage.style.display = 'none';
-                        searchEmployee();
+                        searchWriter();
                     },2000);
                 });
     }
@@ -191,13 +190,13 @@ let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
       event.preventDefault();
 
       const form = document.getElementById('form_to_put');
-      const employeeId = form.getAttribute('data-employee-id');
+      const writerId = form.getAttribute('data-writer-id');
       const writer_name = document.getElementById('nameput').value;
       const writer_description = document.getElementById('descriptionput').value;
 
 
-      const employeeData = {
-        writer_id: employeeId,
+      const writerData = {
+        writer_id: writerId,
         writer_name: writer_name,
         writer_description: writer_description
 
@@ -208,23 +207,23 @@ let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(employeeData)
+        body: JSON.stringify(writerData)
       })
         .then(response => response.json())
         .then(data => {
           const editFormContainer = document.getElementById('edit-form-container');
-          const employeetable = document.getElementById('employee-table');
+          const writertable = document.getElementById('writer-table');
           const putSuccessMessage = document.getElementById('put-success-message');
           putSuccessMessage.style.display = 'block';
-          employeetable.style.display = 'none';
+          writertable.style.display = 'none';
           editFormContainer.style.display = 'none';
           form.reset();
           console.log('Data updated successfully:', data);
           setTimeout(()=>{
             editFormContainer.style.display = 'none';
             putSuccessMessage.style.display = 'none';
-            // Refresh the employee list
-            searchEmployee();
+            // Refresh the writer list
+            searchWriter();
           },1000)
 
         })
@@ -237,6 +236,6 @@ let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
 
 
     // Attach event listeners
-    document.getElementById('show-form-to-add-employee').addEventListener('click', showAddForm);
+    document.getElementById('show-form-to-add-writer').addEventListener('click', showAddForm);
     document.getElementById('form-to-add').addEventListener('submit', handleAddFormSubmit);
     document.getElementById('form_to_put').addEventListener('submit', handlePutFormSubmit);

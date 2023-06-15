@@ -1,58 +1,58 @@
-let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
+let rememberedAlbumId = ""; // Variable to store the remembered album ID
 
-    function searchEmployee() {
+    function searchAlbum() {
       const search = document.getElementById('searchid').value;
-      const employeetable = document.getElementById('employee-table');
+      const albumtable = document.getElementById('album-table');
 
       if (search === '*') {
-        // Fetch all employees from the API
+        // Fetch all albums from the API
         fetch('http://127.0.0.1:5000/album?aid=*')
           .then(response => response.json())
           .then(data => {
-            employeetable.style.display = 'block';
-            const employeeList = document.getElementById('employee-list');
-            employeeList.innerHTML = ''; // Clear all data table before adding new data
+            albumtable.style.display = 'block';
+            const albumList = document.getElementById('album-list');
+            albumList.innerHTML = ''; // Clear all data table before adding new data
 
-            data.forEach(employee => {
+            data.forEach(album => {
               const tr = document.createElement('tr');
               tr.innerHTML = `
-                <td>${employee.album_id}</td>
-                <td>${employee.album_name}</td>
-                <td>${employee.date_release_album}</td>
-                <td>${employee.album_description}</td>
+                <td>${album.album_id}</td>
+                <td>${album.album_name}</td>
+                <td>${album.date_release_album}</td>
+                <td>${album.album_description}</td>
 
                 <td>
-
-                  <button data-eid="${employee.album_id}">Delete</button></td>
+                  <button onclick="showEditForm('${album.album_id}')">Edit</button>
+                  <button data-aid="${album.album_id}">Delete</button></td>
                 </td>
               `;
-              employeeList.appendChild(tr);
+              albumList.appendChild(tr);
             });
           });
       } else {
-        // Fetch employee by ID from the API
+        // Fetch album by ID from the API
         fetch(`http://127.0.0.1:5000/album?aid=${search}`)
           .then(response => response.json())
-          .then(employee => {
-            employeetable.style.display = 'block';
-            const employeeList = document.getElementById('employee-list');
-            employeeList.innerHTML = ''; // Clear all data table before adding new data
+          .then(album => {
+            albumtable.style.display = 'block';
+            const albumList = document.getElementById('album-list');
+            albumList.innerHTML = ''; // Clear all data table before adding new data
 
             const tr = document.createElement('tr');
             tr.innerHTML = `
-              <td>${employee.album_id}</td>
-              <td>${employee.album_name}</td>
-              <td>${employee.date_release_album}</td>
-              <td>${employee.album_description}</td>
+              <td>${album.album_id}</td>
+              <td>${album.album_name}</td>
+              <td>${album.date_release_album}</td>
+              <td>${album.album_description}</td>
               <td>
-
-                <button onclick="deleteEmployee('${employee.album_id}')">Delete</button>
+                <button onclick="showEditForm('${album.album_id}')">Edit</button>
+                <button onclick="deleteAlbum('${album.album_id}')">Delete</button>
               </td>
             `;
-            employeeList.appendChild(tr);
+            albumList.appendChild(tr);
           })
           .catch(error => {
-            employeetable.style.display = 'none';
+            albumtable.style.display = 'none';
             console.log('Album not found:', error);
           });
       }
@@ -63,33 +63,33 @@ let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
       addForm.style.display = 'block';
     }
 
-    function showEditForm(employeeId) {
+    function showEditForm(albumId) {
       const editFormContainer = document.getElementById('edit-form-container');
       const formToPut = document.getElementById('form_to_put');
 
-      const namePut = document.getElementById('nameput');
-      const releasePut = document.getElementById('releaseput');
-      const descriptionPut = document.getElementById('descriptionput');
+      const albumnamePut = document.getElementById('albumnameput');
+      const datereleasealbumPut = document.getElementById('datereleasealbumput');
+      const albumdescriptionPut = document.getElementById('albumdescriptionput');
 
-      // Set the employee ID in the edit form
-      formToPut.setAttribute('data-employee-id', employeeId);
+      // Set the album ID in the edit form
+      formToPut.setAttribute('data-album-id', albumId);
 
-      // Fetch employee data by ID from the API
-      fetch(`http://127.0.0.1:5000/album?aid=${employeeId}`)
+      // Fetch album data by ID from the API
+      fetch(`http://127.0.0.1:5000/album?aid=${albumId}`)
         .then(response => response.json())
-        .then(employee => {
-          namePut.value = employee.album_name;
-          releasePut.value = employee.date_release_album;
-          descriptionPut.value = employee.album_description;
+        .then(album => {
+          albumnamePut.value = album.album_name;
+          datereleasealbumPut.value = album.date_release_album;
+          albumdescriptionPut.value = album.album_description;
           editFormContainer.style.display = 'block';
         });
 
-      // Store the employeeId in the rememberedEmployeeId variable
-      rememberedEmployeeId = employeeId;
+      // Store the albumId in the rememberedAlbumId variable
+      rememberedAlbumId = albumId;
     }
 
          // Delete data
-         function deleteEmployee(album_id) {
+         function deleteAlbum(album_id) {
         // Send a DELETE request to the API with the eid value
         fetch(`http://127.0.0.1:5000/album`, {
           method: 'DELETE',
@@ -100,7 +100,7 @@ let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
         })
         .then(response => {
           // If the request is successful, remove the corresponding table row
-          const row = document.querySelector(`#employee-list tr[data-eid="${album_id}"]`);
+          const row = document.querySelector(`#album-list tr[data-aid="${album_id}"]`);
           row.parentNode.removeChild(row);
           const successMessage = document.getElementById('delete-success-message');
           successMessage.style.display = 'block';
@@ -108,21 +108,21 @@ let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
         .catch(error => console.error(error));
       }
 
-      // Add an event listener to the employee list table
-      const employeeList = document.getElementById('employee-list');
-      employeeList.addEventListener('click', (event) => {
+      // Add an event listener to the album list table
+      const albumList = document.getElementById('album-list');
+      albumList.addEventListener('click', (event) => {
         const target = event.target;
         // Check if the clicked element is a delete button
         if (target.tagName === 'BUTTON' && target.textContent === 'Delete') {
-          const album_id = target.getAttribute('data-eid');
-          deleteEmployee(album_id);
+          const album_id = target.getAttribute('data-aid');
+          deleteAlbum(album_id);
           const successMessage = document.getElementById('delete-success-message');
           successMessage.style.display = 'block';
-          const employeetable = document.getElementById('employee-table');
-          employeetable.style.display = 'none';
+          const albumtable = document.getElementById('album-table');
+          albumtable.style.display = 'none';
           setTimeout(() => {
             successMessage.style.display = 'none';
-            searchEmployee();
+            searchAlbum();
           }, 2000);
         }
       });
@@ -135,7 +135,7 @@ let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
       const date_release_album = document.getElementById('date_release_album').value;
       const album_description = document.getElementById('album_description').value;
 
-      const employeeData = {
+      const albumData = {
         album_id: album_id,
         album_name: album_name,
         date_release_album: date_release_album,
@@ -147,23 +147,23 @@ let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(employeeData)
+        body: JSON.stringify(albumData)
       })
         .then(response => response.json())
         .then(data => {
           const postFormContainer = document.getElementById('form-to-add');
-          const employeetable = document.getElementById('employee-table');
+          const albumtable = document.getElementById('album-table');
           const postSuccessMessage = document.getElementById('success-message');
           postSuccessMessage.style.display = 'block';
-          employeetable.style.display = 'none';
+          albumtable.style.display = 'none';
           postFormContainer.style.display = 'none';
           form.reset();
           console.log('Data Posted successfully:', data);
           setTimeout(()=>{
             // postFormContainer.style.display = 'none';
             postSuccessMessage.style.display = 'none';
-            // // Refresh the employee list
-            searchEmployee();
+            // // Refresh the album list
+            searchAlbum();
           },1000)
         })
         .catch(error => {console.error('Error posting data:', error);
@@ -173,12 +173,12 @@ let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
                     errorMessage.textContent = 'Failed to POST Add exist Album ID, Please!!! ' +'(The main error: ' + error.message +')' ;
                     errorMessage.style.display = 'block';
                     postFormContainer.style.display = 'none';
-                    const employeetable = document.getElementById('employee-table');
-                    employeetable.style.display = 'none';
+                    const albumtable = document.getElementById('album-table');
+                    albumtable.style.display = 'none';
                     setTimeout(()=>{
                         postFormContainer.style.display = 'block';
                         errorMessage.style.display = 'none';
-                        searchEmployee();
+                        searchAlbum();
                     },2000);
                 });
     }
@@ -191,13 +191,13 @@ let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
       event.preventDefault();
 
       const form = document.getElementById('form_to_put');
-      const employeeId = form.getAttribute('data-employee-id');
+      const albumId = form.getAttribute('data-album-id');
       const album_name = document.getElementById('albumput').value;
       const date_release_album = document.getElementById('releaseput').value;
       const album_description = document.getElementById('descriptionput').value;
 
-      const employeeData = {
-        album_id: employeeId,
+      const albumData = {
+        album_id: albumId,
         album_name: album_name,
         date_release_album: date_release_album,
         album_description: album_description
@@ -208,23 +208,23 @@ let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(employeeData)
+        body: JSON.stringify(albumData)
       })
         .then(response => response.json())
         .then(data => {
           const editFormContainer = document.getElementById('edit-form-container');
-          const employeetable = document.getElementById('employee-table');
+          const albumtable = document.getElementById('album-table');
           const putSuccessMessage = document.getElementById('put-success-message');
           putSuccessMessage.style.display = 'block';
-          employeetable.style.display = 'none';
+          albumtable.style.display = 'none';
           editFormContainer.style.display = 'none';
           form.reset();
           console.log('Data updated successfully:', data);
           setTimeout(()=>{
             editFormContainer.style.display = 'none';
             putSuccessMessage.style.display = 'none';
-            // Refresh the employee list
-            searchEmployee();
+            // Refresh the album list
+            searchAlbum();
           },1000)
 
         })
@@ -237,6 +237,6 @@ let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
 
 
     // Attach event listeners
-    document.getElementById('show-form-to-add-employee').addEventListener('click', showAddForm);
+    document.getElementById('show-form-to-add-album').addEventListener('click', showAddForm);
     document.getElementById('form-to-add').addEventListener('submit', handleAddFormSubmit);
     document.getElementById('form_to_put').addEventListener('submit', handlePutFormSubmit);

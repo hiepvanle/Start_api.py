@@ -1,58 +1,58 @@
-let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
+let rememberedSongtypeId = ""; // Variable to store the remembered song type ID
 
-    function searchEmployee() {
+    function searchSongtype() {
       const search = document.getElementById('searchid').value;
-      const employeetable = document.getElementById('employee-table');
+      const songtypetable = document.getElementById('song_type-table');
 
       if (search === '*') {
-        // Fetch all employees from the API
+        // Fetch all songtypes from the API
         fetch('http://127.0.0.1:5000/song_type?stid=*')
           .then(response => response.json())
           .then(data => {
-            employeetable.style.display = 'block';
-            const employeeList = document.getElementById('employee-list');
-            employeeList.innerHTML = ''; // Clear all data table before adding new data
+            songtypetable.style.display = 'block';
+            const songtypeList = document.getElementById('song_type-list');
+            songtypeList.innerHTML = ''; // Clear all data table before adding new data
 
-            data.forEach(employee => {
+            data.forEach(songtype => {
               const tr = document.createElement('tr');
               tr.innerHTML = `
-                <td>${employee.type_id}</td>
-                <td>${employee.type_name}</td>
-                <td>${employee.type_description}</td>
+                <td>${songtype.type_id}</td>
+                <td>${songtype.type_name}</td>
+                <td>${songtype.type_description}</td>
 
 
                 <td>
-                  <button onclick="showEditForm('${employee.type_id}')">Edit</button>
-                  <button data-eid="${employee.type_id}">Delete</button></td>
+                  <button onclick="showEditForm('${songtype.type_id}')">Edit</button>
+                  <button data-stid="${songtype.type_id}">Delete</button></td>
                 </td>
               `;
-              employeeList.appendChild(tr);
+              songtypeList.appendChild(tr);
             });
           });
       } else {
-        // Fetch employee by ID from the API
+        // Fetch songtype by ID from the API
         fetch(`http://127.0.0.1:5000/song_type?stid=${search}`)
           .then(response => response.json())
-          .then(employee => {
-            employeetable.style.display = 'block';
-            const employeeList = document.getElementById('employee-list');
-            employeeList.innerHTML = ''; // Clear all data table before adding new data
+          .then(songtype => {
+            songtypetable.style.display = 'block';
+            const songtypeList = document.getElementById('song_type-list');
+            songtypeList.innerHTML = ''; // Clear all data table before adding new data
 
             const tr = document.createElement('tr');
             tr.innerHTML = `
-              <td>${employee.type_id}</td>
-              <td>${employee.type_name}</td>
-              <td>${employee.description}</td>
+              <td>${songtype.type_id}</td>
+              <td>${songtype.type_name}</td>
+              <td>${songtype.description}</td>
 
               <td>
-                <button onclick="showEditForm('${employee.type_id}')">Edit</button>
-                <button onclick="deleteEmployee('${employee.type_id}')">Delete</button>
+                <button onclick="showEditForm('${songtype.type_id}')">Edit</button>
+                <button onclick="deleteSongtype('${songtype.type_id}')">Delete</button>
               </td>
             `;
-            employeeList.appendChild(tr);
+            songtypeList.appendChild(tr);
           })
           .catch(error => {
-            employeetable.style.display = 'none';
+            songtypetable.style.display = 'none';
             console.log('Song not found:', error);
           });
       }

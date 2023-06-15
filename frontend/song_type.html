@@ -5,37 +5,45 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/frontend/css_code/song_type_style.css" />
+  <style>
+    body {
+        background-image: url(/frontend/css_code/background1.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+    }
+</style>
   <title>Song Type Data</title>
 </head>
 <body>
   <button type="button">
-    <a href="/frontend/main.html" id="logo">Song Type <br>WEBSITE </a>
+    <a href="/frontend/main.html" id="logo">MYMUSIC <br>WEBSITE </a>
   </button>
 
-  <h1 class="employee_title">Song Type Data</h1>
+  <h1 class="song_type_title">Song Type Data</h1>
 
   <!-- Search form -->
-  <form class="employee_form_find">
-    <a style="font-size: larger;">Search:</a> <input class="employee_input" size="40%" type="text" id="searchid" placeholder="Type ID..">
-    <button type="button" onclick="searchEmployee()" style="font-size: 100%;">Find</button>
+  <form class="song_type_form_find">
+    <a style="font-size: larger;">Search:</a> <input class="song_type_input" size="40%" type="text" id="searchid" placeholder="Type ID..">
+    <button type="button" onclick="searchSongtype()" style="font-size: 100%;">Find</button>
   </form>
 
   <!-- Song Type table -->
-  <table class="employee_table" id="employee-table" style="display: none;">
+  <table class="song_type_table" id="song_type-table" style="display: none;">
     <thead>
-      <tr class="list_employee">
+      <tr class="list_song_type">
         <th class="type_id">Type ID</th>
         <th class="type_name">Type Name</th>
         <th class="type_description">Type Description</th>
-        <th class="employee_option">Option</th>
+        <th class="song_type_option">Option</th>
       </tr>
     </thead>
-    <tbody id="employee-list"></tbody>
-<!--    <button class="add_button" id="show-form-to-add-employee" style="font-size: 100%;">Add</button>-->
+    <tbody id="song_type-list"></tbody>
+<!--    <button class="add_button" id="show-form-to-add-song_type" style="font-size: 100%;">Add</button>-->
   </table>
 
   <!-- Form to add song type -->
-  <form class="employee_form_add" id="form-to-add" style="display: none;">
+  <form class="song_type_form_add" id="form-to-add" style="display: none;">
     <label for="type_id">Type ID:</label>
     <input type="text" id="type_id" name="type_id" required>
 
@@ -50,7 +58,7 @@
   </form>
 
   <!-- Form to edit song type -->
-  <div class="employee_form_edit" id="edit-form-container" style="display: none;">
+  <div class="song_type_form_edit" id="edit-form-container" style="display: none;">
     <form id="form_to_put">
       <label for="nameput">Type Name:</label>
       <input type="text" id="nameput" name="name" required>

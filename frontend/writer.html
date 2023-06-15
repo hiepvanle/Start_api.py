@@ -5,37 +5,45 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/frontend/css_code/writer_style.css" />
+  <style>
+    body {
+        background-image: url(/frontend/css_code/background1.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+    }
+</style>
   <title>Writer Data</title>
 </head>
 <body>
   <button type="button">
-    <a href="/frontend/main.html" id="logo">Writer <br>WEBSITE </a>
+    <a href="/frontend/main.html" id="logo">MYMUSIC <br>WEBSITE </a>
   </button>
 
-  <h1 class="employee_title">Writer Data</h1>
+  <h1 class="writer_title">Writer Data</h1>
 
   <!-- Search form -->
-  <form class="employee_form_find">
-    <a style="font-size: larger;">Search:</a> <input class="employee_input" size="40%" type="text" id="searchid" placeholder="Writer ID..">
-    <button  type="button" onclick="searchEmployee()" style="font-size: 100%;">Find</button>
+  <form class="writer_form_find">
+    <a style="font-size: larger;">Search:</a> <input class="writer_input" size="40%" type="text" id="searchid" placeholder="Writer ID..">
+    <button  type="button" onclick="searchWriter()" style="font-size: 100%;">Find</button>
   </form>
 
-  <!-- Employee table -->
-  <table class="employee_table" id="employee-table" style="display: none;">
+  <!-- writer table -->
+  <table class="writer_table" id="writer-table" style="display: none;">
     <thead>
-      <tr class="list_employee">
+      <tr class="list_writer">
         <th class="writer_id">Writer ID</th>
         <th class="writer_name">Writer Name</th>
         <th class="writer_description">Writer Description</th>
-        <th class="employee_option">Option</th>
+        <th class="writer_option">Option</th>
       </tr>
     </thead>
-    <tbody id="employee-list"></tbody>
-    <button class="add_button" id="show-form-to-add-employee" style="font-size: 100%;">Add</button>
+    <tbody id="writer-list"></tbody>
+    <button class="add_button" id="show-form-to-add-writer" style="font-size: 100%;">Add</button>
   </table>
 
-  <!-- Form to add employee -->
-  <form class="employee_form_add" id="form-to-add" style="display: none;">
+  <!-- Form to add writer -->
+  <form class="writer_form_add" id="form-to-add" style="display: none;">
     <label for="writer_id">Writer ID:</label>
     <input type="text" id="writer_id" name="writer_id" required>
 
@@ -49,8 +57,8 @@
     <button type="button" onclick="cancelForm()">Cancel</button>
   </form>
 
-  <!-- Form to edit employee -->
-  <div class="employee_form_edit" id="edit-form-container" style="display: none;">
+  <!-- Form to edit writer -->
+  <div class="writer_form_edit" id="edit-form-container" style="display: none;">
     <form id="form_to_put">
       <label for="nameput">Writer Name:</label>
       <input type="text" id="nameput" name="name" required>
