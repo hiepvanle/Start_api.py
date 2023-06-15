@@ -78,9 +78,8 @@ let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
       fetch(`http://127.0.0.1:5000/writer?wid=${employeeId}`)
         .then(response => response.json())
         .then(employee => {
-          namePut.value = employee.song_name;
-          listenPut.value = employee.listen_count;
-          ratePut.value = employee.rate;
+          namePut.value = employee.writer_id;
+          descriptionPut.value = employee.writer_description;
           editFormContainer.style.display = 'block';
         });
 

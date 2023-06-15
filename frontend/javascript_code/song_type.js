@@ -22,8 +22,7 @@ let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
 
 
                 <td>
-                  <button onclick="showEditForm('${employee.type_id}')">Edit</button>
-                  <button data-eid="${employee.type_id}">Delete</button></td>
+
                 </td>
               `;
               employeeList.appendChild(tr);
@@ -45,8 +44,7 @@ let rememberedEmployeeId = ""; // Variable to store the remembered employee ID
               <td>${employee.description}</td>
 
               <td>
-                <button onclick="showEditForm('${employee.type_id}')">Edit</button>
-                <button onclick="deleteEmployee('${employee.type_id}')">Delete</button>
+
               </td>
             `;
             employeeList.appendChild(tr);
