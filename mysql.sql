@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `mymusic`.`tbl_album` (
   `album_id` VARCHAR(10) NOT NULL,
   `album_name` VARCHAR(45) NOT NULL,
   `date_release_album` DATETIME NULL DEFAULT NULL,
-  `album_description` VARCHAR(2000) NULL DEFAULT NULL,
+  `album_description` TEXT NULL DEFAULT NULL,
   PRIMARY KEY (`album_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
@@ -96,7 +96,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 CREATE TABLE IF NOT EXISTS `mymusic`.`tbl_song_type` (
   `type_id` VARCHAR(10) NOT NULL,
   `type_name` VARCHAR(100) NOT NULL,
-  `description` VARCHAR(2000) NULL DEFAULT NULL,
+  `description` TEXT NULL DEFAULT NULL,
   PRIMARY KEY (`type_id`),
   CONSTRAINT `fk_song_id_2`
     FOREIGN KEY (`type_id`)
@@ -113,7 +113,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 CREATE TABLE IF NOT EXISTS `mymusic`.`tbl_writer` (
   `writer_id` VARCHAR(10) NOT NULL,
   `writer_name` VARCHAR(45) NOT NULL,
-  `writer_description` VARCHAR(2000) NULL DEFAULT NULL,
+  `writer_description` TEXT NULL DEFAULT NULL,
   PRIMARY KEY (`writer_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;

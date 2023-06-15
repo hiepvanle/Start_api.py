@@ -18,8 +18,8 @@ api = Api(app)
 cors = CORS(app)
 conf = read_config()
 
-connections = pymysql.connect(host=conf['DATABASE_01']['host'], user=conf['DATABASE_01']['user'],
-                              password=conf['DATABASE_01']['password'], db=conf['DATABASE_01']['db'])
+connections = pymysql.connect(host=conf['DATABASE_00']['host'], user=conf['DATABASE_00']['user'],
+                              password=conf['DATABASE_00']['password'], db=conf['DATABASE_00']['db'])
 
 
 api.add_resource(Song, '/song', resource_class_kwargs={"connections": connections})
