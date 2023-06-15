@@ -78,8 +78,8 @@ let rememberedWriterId = ""; // Variable to store the remembered writer ID
       fetch(`http://127.0.0.1:5000/writer?wid=${writerId}`)
         .then(response => response.json())
         .then(writer => {
-          namePut.value = writer.writer_name;
-          descriptionPut.value = writer.writer_description
+          namePut.value = writer.writer_id;
+          descriptionPut.value = writer.writer_description;
           editFormContainer.style.display = 'block';
         });
 

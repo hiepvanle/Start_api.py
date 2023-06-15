@@ -22,8 +22,6 @@ let rememberedSongtypeId = ""; // Variable to store the remembered song type ID
 
 
                 <td>
-                  <button onclick="showEditForm('${songtype.type_id}')">Edit</button>
-                  <button data-stid="${songtype.type_id}">Delete</button></td>
                 </td>
               `;
               songtypeList.appendChild(tr);
