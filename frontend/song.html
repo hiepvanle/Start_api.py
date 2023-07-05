@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="/frontend/css_code/song_style.css" />
   <style>
     body {
-        background-image: url(/frontend/css_code/background1.jpg);
+        background-image: url(/frontend/css_code/background2.jpg);
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: 100% 100%;
@@ -17,7 +17,7 @@
 </head>
 <body>
   <button type="button">
-    <a href="/frontend/main.html" id="logo">MYMUSIC <br>WEBSITE </a>
+    <a href="/frontend/main.html" id="logo">GO HOME</a>
   </button>
 
   <h1 class="song_title">Song Data</h1>
@@ -25,7 +25,11 @@
   <!-- Search form -->
   <form class="song_form_find">
     <a style="font-size: larger;">Search:</a> <input class="song_input" size="40%" type="text" id="searchid" placeholder="Song ID..">
-    <button  type="button" onclick="searchSong()" style="font-size: 100%;">Find</button>
+    <button type="button" onclick="searchSong()" style="font-size: 100%;">
+      <span>
+        <svg viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M9.145 18.29c-5.042 0-9.145-4.102-9.145-9.145s4.103-9.145 9.145-9.145 9.145 4.103 9.145 9.145-4.102 9.145-9.145 9.145zm0-15.167c-3.321 0-6.022 2.702-6.022 6.022s2.702 6.022 6.022 6.022 6.023-2.702 6.023-6.022-2.702-6.022-6.023-6.022zm9.263 12.443c-.817 1.176-1.852 2.188-3.046 2.981l5.452 5.453 3.014-3.013-5.42-5.421z"></path></svg>
+      </span>
+    </button>
   </form>
 
   <!-- song table -->
@@ -41,7 +45,10 @@
       </tr>
     </thead>
     <tbody id="song-list"></tbody>
-    <button class="add_button" id="show-form-to-add-song" style="font-size: 100%;">Add</button>
+    <button class="add_button" id="show-form-to-add-song" style="font-size: 100%;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"></path></svg>
+      <span>Add</span>
+    </button>
   </table>
 
   <!-- Form to add song -->
@@ -59,8 +66,18 @@
     <label for="rate">Rate:</label>
     <input type="text" id="rate" name="rate" required>
 
-    <button type="submit">Submit</button>
-    <button type="button" onclick="cancelForm()">Cancel</button>
+    <button class="song_form_add" type="submit" >
+      <span>
+        Submit 
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><g stroke-width="0" id="SVGRepo_bgCarrier"></g><g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <path fill="#ffffff" d="M20.33 3.66996C20.1408 3.48213 19.9035 3.35008 19.6442 3.28833C19.3849 3.22659 19.1135 3.23753 18.86 3.31996L4.23 8.19996C3.95867 8.28593 3.71891 8.45039 3.54099 8.67255C3.36307 8.89471 3.25498 9.16462 3.23037 9.44818C3.20576 9.73174 3.26573 10.0162 3.40271 10.2657C3.5397 10.5152 3.74754 10.7185 4 10.85L10.07 13.85L13.07 19.94C13.1906 20.1783 13.3751 20.3785 13.6029 20.518C13.8307 20.6575 14.0929 20.7309 14.36 20.73H14.46C14.7461 20.7089 15.0192 20.6023 15.2439 20.4239C15.4686 20.2456 15.6345 20.0038 15.72 19.73L20.67 5.13996C20.7584 4.88789 20.7734 4.6159 20.7132 4.35565C20.653 4.09541 20.5201 3.85762 20.33 3.66996ZM4.85 9.57996L17.62 5.31996L10.53 12.41L4.85 9.57996ZM14.43 19.15L11.59 13.47L18.68 6.37996L14.43 19.15Z"></path> </g></svg>
+      </span>
+    </button>
+    <button class="song_form_add" onclick="cancelForm()" type="cancel">
+      <span>
+      <svg height="16" width="50" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1024 1024"><path d="M874.690416 495.52477c0 11.2973-9.168824 20.466124-20.466124 20.466124l-604.773963 0 188.083679 188.083679c7.992021 7.992021 7.992021 20.947078 0 28.939099-4.001127 3.990894-9.240455 5.996574-14.46955 5.996574-5.239328 0-10.478655-1.995447-14.479783-5.996574l-223.00912-223.00912c-3.837398-3.837398-5.996574-9.046027-5.996574-14.46955 0-5.433756 2.159176-10.632151 5.996574-14.46955l223.019353-223.029586c7.992021-7.992021 20.957311-7.992021 28.949332 0 7.992021 8.002254 7.992021 20.957311 0 28.949332l-188.073446 188.073446 604.753497 0C865.521592 475.058646 874.690416 484.217237 874.690416 495.52477z"></path></svg>
+      Cancel
+    </span>
+    </button>
 
   </form>
 
@@ -77,8 +94,18 @@
       <label for="rateput">Rate:</label>
       <input type="text" id="rateput" name="rate" required>
 
-      <button type="submit">Submit</button>
-      <button type="button" onclick="cancelFormedit()">Cancel</button>
+      <button class="song_form_edit" type="submit" >
+        <span>
+          Submit 
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><g stroke-width="0" id="SVGRepo_bgCarrier"></g><g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <path fill="#ffffff" d="M20.33 3.66996C20.1408 3.48213 19.9035 3.35008 19.6442 3.28833C19.3849 3.22659 19.1135 3.23753 18.86 3.31996L4.23 8.19996C3.95867 8.28593 3.71891 8.45039 3.54099 8.67255C3.36307 8.89471 3.25498 9.16462 3.23037 9.44818C3.20576 9.73174 3.26573 10.0162 3.40271 10.2657C3.5397 10.5152 3.74754 10.7185 4 10.85L10.07 13.85L13.07 19.94C13.1906 20.1783 13.3751 20.3785 13.6029 20.518C13.8307 20.6575 14.0929 20.7309 14.36 20.73H14.46C14.7461 20.7089 15.0192 20.6023 15.2439 20.4239C15.4686 20.2456 15.6345 20.0038 15.72 19.73L20.67 5.13996C20.7584 4.88789 20.7734 4.6159 20.7132 4.35565C20.653 4.09541 20.5201 3.85762 20.33 3.66996ZM4.85 9.57996L17.62 5.31996L10.53 12.41L4.85 9.57996ZM14.43 19.15L11.59 13.47L18.68 6.37996L14.43 19.15Z"></path> </g></svg>
+        </span>
+      </button>
+      <button class="song_form_edit" onclick="cancelForm()" type="cancel">
+        <span>
+        <svg height="16" width="50" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1024 1024"><path d="M874.690416 495.52477c0 11.2973-9.168824 20.466124-20.466124 20.466124l-604.773963 0 188.083679 188.083679c7.992021 7.992021 7.992021 20.947078 0 28.939099-4.001127 3.990894-9.240455 5.996574-14.46955 5.996574-5.239328 0-10.478655-1.995447-14.479783-5.996574l-223.00912-223.00912c-3.837398-3.837398-5.996574-9.046027-5.996574-14.46955 0-5.433756 2.159176-10.632151 5.996574-14.46955l223.019353-223.029586c7.992021-7.992021 20.957311-7.992021 28.949332 0 7.992021 8.002254 7.992021 20.957311 0 28.949332l-188.073446 188.073446 604.753497 0C865.521592 475.058646 874.690416 484.217237 874.690416 495.52477z"></path></svg>
+        Cancel
+      </span>
+      </button>
 
     </form>
   </div>

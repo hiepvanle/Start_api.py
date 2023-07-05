@@ -7,7 +7,13 @@ body {
     margin: 0;
     padding: 0;
   }
-
+  #myVideo {
+    position: fixed;
+    right: 0px;
+    bottom: 0px;
+    min-width: 100%;
+    height: 1025px;
+  }
   .container {
     max-width: 800px;
     margin: 0 auto;
@@ -95,6 +101,19 @@ body {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 0.7em 1.4em 0.7em 1.1em;
+    color: white;
+    background: #ad5389;
+    background: linear-gradient(0deg, rgba(20,167,62,1) 0%, rgba(102,247,113,1) 100%);
+    border: none;
+    box-shadow: 0 0.7em 1.5em -0.5em #14a73e98;
+    letter-spacing: 0.05em;
+    border-radius: 20em;
   }
 
   /* Form to Add Songtype */
@@ -104,21 +123,76 @@ body {
   }
     /* Find Button Styles */
     form button[type="button"] {
-      display: inline-block;
-      margin: 5px;
-      padding: 10px 20px;
-      background-color: #2196f3;
-      color: #fff;
+      position: relative;
       border: none;
-      border-radius: 4px;
+      background-color: white;
+      color: #212121;
+      padding: 20px;
+      display: inline-block;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 600;
+      gap: 10px;
+      border-radius: 10px;
+      transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      overflow: hidden;
     }
-
-    form button[type="button"]:hover {
-      background-color: #0d8bf5;
+    
+    form button[type="button"] span {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
     }
-
+    
+    form button[type="button"]::before {
+      content: "";
+      position: absolute;
+      background-color: rgb(112, 140, 216);
+      width: 100%;
+      height: 100%;
+      left: 0%;
+      bottom: 0%;
+      transform: translate(-100%, 100%);
+      border-radius: inherit;
+    }
+    
+    form button[type="button"] svg {
+      fill: rgb(112, 140, 216);
+      transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+    }
+    
+    form button[type="button"]:hover::before {
+      animation: shakeBack 0.6s forwards;
+    }
+    
+    form button[type="button"]:hover svg {
+      fill: white;
+      scale: 1.3;
+    }
+    
+    form button[type="button"]:active {
+      box-shadow: none;
+    }
+    
+    @keyframes shakeBack {
+      0% {
+        transform: translate(-100%, 100%);
+      }
+    
+      50% {
+        transform: translate(20%, -20%);
+      }
+    
+      100% {
+        transform: translate(0%, 0%);
+      }
+    }
+    
   .song_type_form_add label,
   .song_type_form_edit label {
     display: block;

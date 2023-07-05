@@ -5,19 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/frontend/css_code/main_style.css" />
-    <style>
+    <!-- <style>
         body {
-            background-image: url(/frontend/css_code/background1.jpg);
+            background-clip: url(/frontend/css_code/welcome.mp4);
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: 100% 100%;
         }
-    </style>
+    </style> -->
     <title>Home</title>
 </head>
 <body>
     <nav class="navbar">
-        <div class="navbar__container">2
+        <div class="navbar__container">
             <a href="/frontend/main.html" id="navbar__logo">MYMUSIC <br>WEBSITE </a>
             <div class="navbar__toggle" id="mobile-menu">
                 <span class="bar"></span>
@@ -46,5 +46,11 @@
             </ul>
         </div>
     </nav>
+    <video autoplay muted loop id="myVideo" >
+        <source src="/frontend/css_code/welcome.mp4" type="video/mp4"> 
+     </video>
+     <script>
+         var video = document.getElementById("myVideo");
+     </script>
 </body>
 </html>
