@@ -1,0 +1,255 @@
+#logo {
+    text-decoration: none;
+    color: #0c0b0b;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  .form_container {
+      width: fit-content;
+      height: fit-content;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      padding: 30px 40px 30px 40px;
+      background-color: #ffffff;
+      box-shadow: 0px 106px 42px rgba(0, 0, 0, 0.01),
+        0px 59px 36px rgba(0, 0, 0, 0.05), 0px 26px 26px rgba(0, 0, 0, 0.09),
+        0px 7px 15px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+      border-radius: 11px;
+      font-family: "Inter", sans-serif;
+      min-width: 100%;
+      min-height: 850px;
+    }
+    
+    .logo_container {
+      box-sizing: border-box;
+      width: 160px;
+      height: 160px;
+      background: linear-gradient(180deg, rgba(245, 235, 235, 0) 50%, #F8F8F888 100%);
+      border: 1px solid #F7F7F8;
+      filter: drop-shadow(0px 0.5px 0.5px #d81e1e) drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
+      border-radius: 11px;
+      background: url(/frontend/css_code/logo1.jpg);
+      }
+    
+    .title_container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    .title {
+      align-items: center;
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #212121;
+    }
+    
+    .subtitle {
+      font-size: 0.725rem;
+      max-width: 80%;
+      text-align: center;
+      line-height: 1.1rem;
+      color: #8B8E98
+    }
+    
+    .input_container {
+      width: 60%;
+      height: fit-content;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .input_container span {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      /* align-items: center;
+      justify-content: center; */
+      gap: 0.75rem;
+      transition: all .4s ease;
+    }
+    button svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+    
+    .input_container span:nth-child(2),
+    .input_container span:nth-child(3) {
+      position: absolute;
+      top: 50px;
+      color: #fff;
+    }
+    
+    .input_container span:nth-child(2) {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #209aeb;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    .input_container span:nth-child(3) {
+      background-color: #488aec;
+    }
+    
+    /* .input_container:hover {
+      box-shadow: 0 10px 15px -3px #488aec4f, 0 4px 6px -2px #488aec17; */
+    /* } */
+    
+    .input_container:hover span:nth-child(2), .input_container:focus span:nth-child(3) {
+      top: 0;
+    }
+    
+    .input_container:focus {
+      box-shadow: none;
+    }
+    .input_container button {
+      display: flex;
+      height: 3em;
+      width: 200px;
+      align-items: center;
+      justify-content: center;
+      background-color: #0a729b;
+      border-radius: 3px;
+      letter-spacing: 1px;
+      transition: all 0.2s linear;
+      cursor: pointer;
+      border: none;
+      background: #0a729b;
+     }
+     
+     .input_container button > svg {
+      margin-right: 5px;
+      margin-left: 5px;
+      font-size: 20px;
+      transition: all 0.4s ease-in;
+     }
+     
+     .input_container button:hover > svg {
+      font-size: 1.2em;
+      transform: translateX(-5px);
+     }
+     
+     .input_container button:hover {
+      box-shadow: 9px 9px 33px #0a729b, -9px -9px 33px #0a729b;
+      transform: translateY(-2px);
+     }
+    
+    .icon {
+      width: 20px;
+      position: absolute;
+      z-index: 99;
+      left: 12px;
+      bottom: 9px;
+    }
+    
+    .input_label {
+      font-size: 0.75rem;
+      color: #8B8E98;
+      font-weight: 600;
+    }
+    
+    .input_field {
+      width: auto;
+      height: 40px;
+      padding: 0 0 0 40px;
+      border-radius: 7px;
+      outline: none;
+      border: 1px solid #e5e5e5;
+      filter: drop-shadow(0px 1px 0px #efefef)
+        drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
+      transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
+    }
+    
+    .input_field:focus {
+      border: 1px solid transparent;
+      box-shadow: 0px 0px 0px 2px #242424;
+      background-color: transparent;
+    }
+    
+    /* .sign-up_btn {
+      width: 60%;
+      height: 40px;
+      border: 0;
+      background: #115DFC;
+      border-radius: 7px;
+      outline: none;
+      color: #ffffff;
+      cursor: pointer;
+    } */
+    
+    .separator {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      color: #8B8E98;
+    }
+    
+    .separator .line {
+      display: block;
+      width: 100%;
+      height: 1px;
+      border: 0;
+      background-color: #e8e8e8;
+    }
+    
+    .note {
+      font-size: 0.75rem;
+      color: #8B8E98;
+      text-decoration: underline;
+    }
+    .input_container label {
+      display: block;
+      margin-top: 10px;
+    }
+    .input_container input[type="text"],
+    .input_container input[type="email"]{
+      width: 99%;
+      padding: 5px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      outline: none;
+    }
+    .input_container button[type="submit"],
+    .input_container button[type="button"]{
+      /* display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #284be7;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer; */
+      text-align: center;
+      width: 60%;
+      height: 40px;
+      border: 0;
+      background: #115DFC;
+      border-radius: 7px;
+      outline: none;
+      color: #ffffff;
+      cursor: pointer;
+    }
+    #success-message,
+    #error-message {
+      display: none;
+      margin-top: 10px;
+      text-align: center;
+      font-weight: bold;
+    }
+    
+    #error-message {
+      color: red;
+    }

@@ -7,8 +7,8 @@ from classes.tbl_album import Album
 from classes.tbl_singer import Singer
 from classes.tbl_writer import Writer
 from classes.tbl_begin import Begin
+from classes.tbl_login import Login
 
-import pymysql
 from flask_cors import CORS
 from utils import *
 
@@ -29,6 +29,7 @@ api.add_resource(Album, '/album', resource_class_kwargs={"connections": connecti
 api.add_resource(Singer, '/singer', resource_class_kwargs={"connections": connections})
 api.add_resource(Writer, '/writer', resource_class_kwargs={"connections": connections})
 api.add_resource(Begin, '/begin', resource_class_kwargs={"connections": connections})
+api.add_resource(Login, '/login', resource_class_kwargs={"connections": connections})
 
 
 if __name__ == '__main__':
