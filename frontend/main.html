@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/frontend/css_code/main_style.css" />
     <link rel="icon" type="image/x-icon" href="/frontend/css_code/logo1.jpg" >
-    <title>Home</title>
+    <title>My Music</title>
 </head>
 <body>
     <nav class="navbar">
@@ -18,6 +18,12 @@
                 <span class="bar"></span>
             </div>
             <ul class="navbar__menu">
+              <div class="container-input">
+                <input type="text" placeholder="Search" name="text" class="input">
+                <svg fill="#000000" width="20px" height="20px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z" fill-rule="evenodd"></path>
+              </svg>
+              </div>              
                 <li class="navbar__item">
                     <a href="/frontend/main.html" class="navbar__links">Home</a>
                 </li>
@@ -98,7 +104,7 @@
             So what are you waiting for? Sign up for MyMusic today and start exploring the world of music like never before!</p>
         <button id="myBtn" onclick="myFunction()">Pause</button>
       </div>
-     <script>
+     <!-- <script>
          var video = document.getElementById("myVideo");
          var btn = document.getElementById("myBtn");
 
@@ -112,6 +118,7 @@
                 btn.innerHTML = Play;
             }
          }
-     </script>
+     </script> -->
+     <script src="javascript_code/main.js"></script>
 </body>
 </html>

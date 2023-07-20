@@ -10,7 +10,7 @@ class Begin(Resource):
         if request.query_string is not None or request.query_string != "":
             with self.connections.cursor() as cursor:
                 # get all
-                if request.args[''] == "*":
+                if request.args['full'] == "*":
                     drive = []
                     sql = "SELECT * FROM `tbl_begin`"
                     cursor.execute(sql)
@@ -25,6 +25,21 @@ class Begin(Resource):
                         }
                         drive.append(data)
                     return drive, 200
+                else:
+                    sql = "SELECT * FROM `tbl_begin` WHERE `song_id`=%s OR `singer_id`=%s OR `album_id`=%s "
+                    cursor.execute(sql, (request.args['sid'], request.args['sgid'], request.args['aid']))
+                    result = cursor.fetchone()
+                    data = {
+                        'song_id': result[0],
+                        'singer_id': result[1],
+                        'album_id': result[2],
+                        'date': result[3],
+                        'location': result[4],
+                    }
+                    return data, 200
+        else:
+            return {"Not Found"}
+
 
     def delete(self):
         return {"status": "method delete not supported"}
