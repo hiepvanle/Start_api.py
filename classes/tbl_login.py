@@ -32,7 +32,7 @@ class Login(Resource):
             data = request.get_json(force=True)
             with self.connections.cursor() as cursor:
                 sql_post = "INSERT INTO `tbl_login` (`email`, `password`) " \
-                           "VALUES ('{}', '{}');"
+                           "VALUES ('{}', '{}')"
                 sql_post = sql_post.format(data['email'], data['password'])
                 cursor.execute(sql_post)
                 self.connections.commit()
